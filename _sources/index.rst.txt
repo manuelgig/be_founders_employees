@@ -1,0 +1,54 @@
+.. be_founders_employees documentation master file, created by
+   sphinx-quickstart on Mon Feb 6 16:23:27 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+####################################
+The *be_founders-employees* database
+####################################
+
+This database contains rich micro-data about the employees (n=99,432) from a
+sample Belgian start-ups (m=910). It is a spin-off from the `be_founders project
+<https://manuelgig.github.io/be_founders_documentation/>`_. Whereas
+**be_founders** contains data about start-up founders only,
+**be_founders_employees** contains information about the founders
+*and* the employees.
+
+Using the **be_founders** start-ups as a starting point, we developed bots
+to find all their employees in a well-known employment-focused social media
+platform, and to download publicly-available data about their employment and
+education history. We developed NLP tools to pre-process, parse and disambiguate
+the data, and the resulting database includes among other things:
+
+* The individuals that were employed by the start-ups (up until 2022)
+* Their work experience (employer, role, etc.)
+* Their educational background (university/school, diploma, etc.)
+* Basic demographic data
+
+The data allows to approximate the personnel base of each start-up over time,
+with rich information about turnover and churn, but employee skills, experience,
+and networks.
+
+Current version
+---------------
+
+v1.0 (April 2023; first release)
+
+#####
+Index
+#####
+
+.. Hidden TOCs
+
+.. toctree::
+
+    userdoc/user_main
+    download
+    changelog
+
+Indices and tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

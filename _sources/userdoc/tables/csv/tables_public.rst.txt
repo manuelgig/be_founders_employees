@@ -1,0 +1,116 @@
+
+
+.. _tables-employee_turnover-label:
+
+employee_turnover
+^^^^^^^^^^^^^^^^^
+
+.. csv-table:: employee_turnover
+   :file: employee_turnover.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-event_flat-label:
+
+event_flat
+^^^^^^^^^^
+
+.. csv-table:: event_flat
+   :file: event_flat.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-isced_field-label:
+
+isced_field
+^^^^^^^^^^^
+
+.. csv-table:: isced_field
+   :file: isced_field.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-onet_alternate_titles-label:
+
+onet_alternate_titles
+^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: onet_alternate_titles
+   :file: onet_alternate_titles.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-orbis-label:
+
+orbis
+^^^^^
+
+.. csv-table:: orbis
+   :file: orbis.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-orbis_fin-label:
+
+orbis_fin
+^^^^^^^^^
+
+.. csv-table:: orbis_fin
+   :file: orbis_fin.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-orbis_sector-label:
+
+orbis_sector
+^^^^^^^^^^^^
+
+.. csv-table:: orbis_sector
+   :file: orbis_sector.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-org_orbis_link-label:
+
+org_orbis_link
+^^^^^^^^^^^^^^
+
+.. csv-table:: org_orbis_link
+   :file: org_orbis_link.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-role_onet_link-label:
+
+role_onet_link
+^^^^^^^^^^^^^^
+
+.. csv-table:: role_onet_link
+   :file: role_onet_link.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

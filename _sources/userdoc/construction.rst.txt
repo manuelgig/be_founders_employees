@@ -1,0 +1,638 @@
+.. _construction-label:
+
+Construction of the dataset
+###########################
+
+Data collection
+***************
+
+Belgian start-ups in CrunchBase
+===============================
+
+We retrieved a list of all Belgian start-ups listed in CrunchBase. In this step
+we obtained both start-up names and their WEFP URLs and permalinks.
+
+Identifying and retrieving the Belgian start-ups from WEFP
+==========================================================
+
+Each company that has a profile in WEFP gets different identifiers in the
+platform:
+#. a WEFP hash-like uuid (no longer accessible to platform users),
+#. a stable numeric id which is accessible to platform users.
+
+We used the company names and URLs obtained from CrunchBase to run a mechanized
+search to obtain the WEFP stable numeric id's that correspond to each start-up
+in our database. We looked up each start-up name in WEFP and retrieved all the
+WEFP companies with the same, or similar, name. We repeated the search steps
+with different restrictions (e.g., searching among Belgian- and/or EU-based
+companies only). The result of each step in the search process is an html
+file with search results. We obtained thousands of such files and logged the
+whole process in tables :ref:`tables-log_org_id_search-label` and
+:ref:`tables-log_org_id_search_results-label`. We parsed the search results
+and used text similarity algorithms to match CrunchBase and WEFP company names,
+and to discard false positives (e.g., the search for Datacamp retrieved
+a Brazilian software company named Datacamp ltd.). Additionally, we manually
+checked the quality of the matches.
+
+As a result of this process, we could link the start-up names (strings) to
+WEFP unique numeric id's. We used the latter in the next step, searching
+for the WEFP users who worked at each start-up (as identified by their
+respective unique numeric id).
+
+Looking up the employees in WEFP
+================================
+
+We used the unique company numeric id obtained in the previous step to run
+a mechanized search for all the WEFP users who report in their public profiles
+to have worked for that company. The search produced thousands of html files,
+which we stored. We record the results of the search process in tables
+:ref:`tables-log_person_search_1-label` and
+:ref:`tables-log_person_search_2-label`.
+
+We parsed the html files and store their contents in table
+:ref:`tables-log_employee_search_results-label`.
+
+In this step, we obtained the names, identifiers and URLs of WEFP users linked
+to our start-ups. We also implemented algorithms to discard false positives.
+
+.. admonition:: Completeness of the search results
+
+  In WEFP, users can "connect" to each other (like becoming friends in Facebook).
+  To protect the security of WEFP users, the platform restricts the visibility
+  of users *far away* in one's social network. *Far away* is defined as a
+  fourth-degree contact or higher. When the result of a person search is a person
+  who is *far away*, WEFP informs that such person exists, but masks their name
+  and id. Hence, the coverage of the search process increases with the breadth
+  and heterogeneity of the network of the account used to search from. We
+  performed our mechanized searches using a WEFP account with more than 500
+  contacts, spanning multiple countries and industry sectors.
+
+  Around 10-15% of the search results were masked, we estimate that our database
+  includes about 85-90% of the start-up's employees.
+
+.. _retrieving_employee_data-label:
+
+Retrieving the employee individual data from WEFP
+=================================================
+
+We used the URLs and identifiers from the previous step to download employee
+work experience and education data using web scrapers. We obtained two html
+files per employee: one with work experience and one with education data.
+We stored the thousands of html files with employee data and recorded the
+process in table :ref:`tables-log_person_download-label`.
+
+Data parsing
+************
+
+Events
+======
+
+We parsed the individual html files from step :numref:`retrieving_employee_data-label`
+to extract raw event data. An event is an instance of work or education attributed
+to an employee. In its raw form, each event has the following information:
+
+* The person that does the event
+* Start / end date
+* The organization where the person worked or studied (name and unique id)
+* The role or job title (for work events) or the education program (for study
+  events)
+* A role or program description
+* A location (a city, region, country, etc.)
+
+Filling in all fields is not mandatory, so some field values are missing in events.
+
+Locations
+=========
+
+We processed locations in two steps:
+
+#. we harmonized location data by canonicalizing, cleaning and parsing the
+   raw location strings using various Python NLP modules
+#. we looked up the "clean" location strings using :py:mod:`geocoder`, and
+   obtained their coordinates (latitude and longitude)
+#. we looked up the coordinates using :py:mod:`geopy` to obtain disambiguated
+   location meta-data (location name, country, ISO-3166-2 codes, etc.)
+
+Table :ref:`table-main_location-label` includes concise location data for each
+unique location uuid. Table :ref:`table-main_location_link-label` relates raw
+and parsed locations, and includes fine grained location data.
+
+ .. admonition:: Example: parsing locations in Brussels
+
+   Our algorithm to parse location maps the following location strings
+
+   * Parvis Sainte-Gudule, 1000, Bruxelles
+   * Brussels
+   * Rue de la Loi 42, 1040, Bruxelles
+   * Bourgetlaan 60, 1140, Brussel
+
+   to **Ville de Bruxelles - Stad Brussel** (ISO-3166-2 label: "BE-BRU")
+
+Organization names
+==================
+
+When a person creates an event in WEFP, either work experience or education, they
+can list the organization where this work event took/is taking place. If WEFP
+has a dedicated page for the organization, a link to it is provided in the event.
+This link is a URL which contains the organization's name and unique numeric
+identifier. Hence, by parsing organization information from the events we generate
+a new mapping of organization names and their unique numeric id. For example,
+if a person creates a study event that includes KU Leuven, while displaying the
+event WEFP will show a URL containing both **Katholieke Universiteit Leuven** and
+**3629** (KU Leuven's unique numeric id at WEFP).
+
+However, not all organizations in the database have a dedicated page at WEFP.
+When organizations have a dedicated page at WEFP, we use names, unique
+numeric id, and locations to disambiguate organization data; when they do not,
+we use only names and location data. We proceeded as follows:
+
+#. we harmonized organization names data by canonicalizing, cleaning and parsing
+   the raw organization name strings using various Python NLP modules
+#. we combined the "clean" organization names with the WEFP organization numeric
+   id's and disambiguated location data to generate disambiguated organization
+   uuid's
+
+Table :ref:`table-main_organization-label` contains the organization names
+and WEFP numeric ids, whereas a row in table :ref:`table-main_organization_link-label`
+connects raw and parsed organization names.
+
+Job titles
+==========
+
+We processed job title (also referred as job role) strings to harmonize them,
+but also to extract from them the job's functional area (e.g., accounting,
+marketing, HR, etc.) and rank (e.g., top management, mid-management,
+non-management). We proceeded as follows:
+
+#. we harmonized job titles  by canonicalizing,
+   cleaning and parsing the raw job title strings using various Python NLP
+   modules
+#. we used :py:mod:`TextBlob` to correct spelling mistakes
+#. when a single job title string contained two or more comma-separated parts
+   (e.g., ".NET developer, team leader"; "accounts executive, internship")
+   we processed each part separately
+#. to deal with job titles in languages other than English we used
+   :py:mod:`polyglot` to detect their language, and :py:mod:`translate-api`
+   to get their English translation
+
+Extracting job ranks and functional areas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We followed the methodology in :cite:t:`chen2016skill` to classify the parsed
+job titles into:
+
+* Job ranks: top management, management, sub-management and non-management
+* Functional areas: Business and Management, Production, R&D and Engineering,
+ Personnel, Sales and Marketing, Accounting and Finance
+* Other indicators (e.g., *engineering role*\, *medical role*\, etc.)
+
+The cited methodology uses sets of keywords linked to each of the fields above
+to assign a job title string to one class if two conditions are
+fulfilled:
+
+* the string contains one or more keywords linked to a class,
+* the string does not contain a keyword in a set of exclusions, particular to
+ that class.
+
+For instance, we classify job title strings containing terms such as *sales*,
+*key account* or *marketer* into **Sales and Marketing**. However, we abstain
+from doing so if the string also contains a term such as *bond* (e.g., in
+*bond sales*\).
+
+.. note::
+
+ We used the dictionary provided by :cite:t:`chen2016skill` and expanded it with
+ new terms after careful examination of the job title string in our database.
+
+
+
+
+We used the data in table :ref:`tables-R01_be_founders_source-label` as the
+starting point to build the database, and proceeded as follows:
+
+#. Extracting columns with the names, work experience and education history
+   of the entrepreneurs from table :ref:`tables-R01_be_founders_source-label`.
+#. Combining all columns that referred to the same field into a single one.
+   E.g., there are about 30 columns named *exp<xx>_org* (where *<xx>* is a
+   number) with the names of each entrepreneur's past employers,
+   but columns like *featured_job_organization_name* contains employers'
+   names as well.
+#. Creating raw tables :ref:`tables-R02_edu_source-label` and
+   :ref:`tables-R03_exp_source-label` with raw data limited to
+   education and work history, respectively.
+#. Harmonizing fields: canonicalizing, cleaning and parsing strings (see
+   :ref:`section-cleaning-label` for more details).
+#. Creating index variables for the parsed fields.
+#. Disambiguating the parsed (string) fields (i.e., reduce all the strings that
+   refer to the same entity to a single, uniform, label) using NLP techniques to
+   match them to relevant external databases (see
+   :ref:`section-matching-label` for more details).
+
+We explain these steps in detail in the next sections.
+:numref:`table-raw_parsed-label` below shows the correspondences between the raw
+fields of :ref:`tables-F01_founders_info-label`, :ref:`tables-R02_edu_source-label`
+and :ref:`tables-R03_exp_source-label` and parsed fields in the main tables.
+
+.. _table-raw_parsed-label:
+
+.. table:: Data: from raw to parsed fields
+
+  +-----------------+----------------+--------------+--------------------------+
+  | Raw field name  | Parsed name    | Parsed id    | Linked to table(s)       |
+  +=================+================+==============+==========================+
+  | name_src        | name           | ind_id       | F01_founders_info,       |
+  |                 |                |              | R03_exp_source,          |
+  |                 |                |              | R03_exp_source,          |
+  |                 |                |              | E01_edu_main_parsed,     |
+  |                 |                |              | W01_exp_main_parsed,     |
+  |                 |                |              | U01_exp_flat,            |
+  |                 |                |              | U02_edu_flat             |
+  +-----------------+----------------+--------------+--------------------------+
+  | exp_org         | exp_org_parsed | org_id       | W01_exp_main_parsed,     |
+  |                 |                |              | U01_exp_flat             |
+  +-----------------+----------------+--------------+--------------------------+
+  | exp_jt          | jt_parsed      | jt_parsed_id | |replace_jt_table1|,     |
+  |                 |                |              | |replace_jt_table1|      |
+  +-----------------+----------------+--------------+--------------------------+
+  | edu_org         | edu_org_parsed | org_id       | E01_edu_main_parsed,     |
+  |                 |                |              | U02_edu_flat             |
+  +-----------------+----------------+--------------+--------------------------+
+  | edu_prg         | edu_prg_parsed | jt_parsed_id | E01_edu_main_parsed,     |
+  |                 |                |              | |replace_jt_table1|,     |
+  |                 |                |              | U02_edu_flat             |
+  +-----------------+----------------+--------------+--------------------------+
+
+.. |replace_jt_table1| replace:: W02_job_titles_raw_parsed
+.. |replace_jt_table2| replace:: W03_job_titles_parsed_onet
+.. |replace_edu_table| replace:: E04_edu_programs_isced_levels
+
+.. warning:: **Parsing of job titles:** There is unique id for each raw job title
+  in *exp_jt*, stored as variable *jt_raw_id*\. Because one raw job title often
+  includes several roles (e.g., "CEO, founder"), we parsed job titles in a way
+  that assigns each of these roles to a separate *parsed job title*\. Hence,
+  each *jt_raw_id* may correspond to multiple *jt_parsed_id*. Table
+  :ref:`tables-W02_job_titles_raw_parsed-label` contains the correspondence between the id's
+  of raw and parsed job titles.
+
+.. _section-cleaning-label:
+
+Cleaning raw strings
+====================
+
+We pre-processed and harmonized all raw string fields by canonicalizing them:
+
+#. Removing punctuation marks and non-alphanumeric characters;
+#. Replacing accented, special and non-latin characters with their closest
+   character in a US keyboard (e.g., é -> e, á -> a, ž -> z;
+   using :py:mod:`unidecode`);
+#. Replacing roman numerals by latin numerals;
+#. Turning strings to uppercase (in the experience fields) or lowercase
+   (in the education fields)
+#. Removing multiple, leading and trailing white spaces
+#. Standardizing firm type tokens (*limited* -> *ltd*, *company* -> *co*,
+   *international* -> *intl*, etc.)
+
+.. _section-matching-label:
+
+String disambiguation
+=====================
+
+We matched the harmonized strings containing organization names (from
+firms and universities/educational instutitutions) and job titles against
+dictionaries and lists of terms compiled using relevant external databases.
+This facilitated the disambiguation, but also allowed to directly link our data
+with the external databases where those dictionaries and lists come from.
+Moreover, we matched some fields to several different databases. E.g.,
+we matched universities names to Orbis company data, but also to the ETER and
+Carnegie databases. Similarly, we matched firm names to Orbis, Compustat and CSRP.
+
+Matching organization names
+-----------------------------
+
+.. _section-matching-bus-reg-label:
+
+Matching against business register datasets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+First, we pooled all harmonized organization names (*exp_org*\,
+*featured_job_organization_name*\, *edu_org*\) and matched them to Bvd's Bel-first
+and Orbis databases, using their batch upload tools. These tools take a company
+name (i.e., our harmonized firm names) and look for their closest match in a
+business directory of millions of statutory organization names (i.e., the name
+under which organizations are recorded in national business registers). Both
+databases record alternative and prior names of the organizations.
+
+Bel-first has data about organizations registered in Belgium, whereas Orbis has
+world-wide coverage. Hence, Bel-first data is a subset of Orbis. However,
+because the organizations in our database are predominantly Belgian, we matched
+the harmonized names using Bel-first to begin with. We retained succesful
+matches, and took the names that remained unmatched to the Orbis tool. Finally,
+we replaced harmonized names in our list with their respective successful
+from Bel-first and Orbis.
+
+.. note:: Both Bel-first and Orbis provide an indication of the quality of
+  their match: a ranking from excellent to poor using letters A-E. We kept
+  only A and B matches--i.e., excellent and good.
+
+Second, we took the list that resulted from the previous step and matched the
+names against all firm/organization names in each of the following datasets:
+
+* Compustat (downloaded on 24th September, 2021),
+* CSRP (downloaded on 25th September 2021),
+* the Crunchbase 2013 data dump and a partial 2015 export (see :ref:`links-label`),
+* AnaCredit's list of international organization (see :ref:`links-label`).
+
+Prior to matching, we pre-processed the company names with the steps listed in
+:ref:`section-cleaning-label`. In this step we used :py:mod:`process.extractOne` from the
+:py:mod:`fuzzywuzzy`. As inputs, the :py:mod:`extractOne` module takes a list of focal strings
+(our organization names) and a list of candidates names (e.g., all Compustat
+firm names). As output, it finds the string in the candidate group which is closest to
+each focal string, using the Levenshtein Distance (LD).
+
+Third, we further refined the matching results from step two and retained only
+{focal, candidate} duples fulfilling one of the following conditions:
+
+  * Adjusted token sort ratio >= 95
+
+  OR
+
+  * Adjusted token sort ratio >70 AND token set ratio >= 95
+
+.. note::
+
+  *Adjusted token sort ratio* and *token set ratio* are two LD-based metrics in
+  the :py:mod:`fuzzywuzzy.fuzz` module. The former computes the LD between a
+  pair of strings strings after tokenizing each string and sorting its tokens
+  alphabetically; the resulting score is adjusted using the inverse string length.
+  The latter computes the LD latter after tokenizing and performing a set
+  operation to remove repeated tokens.
+
+We run the steps explained in this sub-section twice:
+
+* With the complete harmonized strings
+* Removing the firm type tokens (e.g., *co*\, *ltd*\, *inc*, etc.)
+
+We examined the entities that could not be matched and found out that,
+oftentimes, the public and statutory name of a company differ and the self-reported
+company name in LinkedIn will not match any company from any database. E.g.,
+in our raw data, people report having worked for Humin, whose statutory name is
+Humanovation. Therefore, as a fourth step, we analyzed the organization names that
+were still unmatched and manually looked for their matching firms in the Orbis
+database. To do this we looked up firms using information other than the name,
+such as the physical address, website, email, phone number and/or founders' name.
+
+Finally, the quality of the matching process was evaluated by two external
+raters.
+
+.. admonition:: Matching results
+
+  There were 5,602 distinct organization names in the raw data (including firms
+  as well as educational institutions). The harmonization and disambiguation
+  steps as described above reduced the number of distinct organizations to 4244.
+  Of this total, 3,766 (88.7%) were matched to an external database and 3748
+  (88.3%) were matched to BvD (Bel-first and/or Orbis).
+
+Matching against datasets of university names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We matched the list of organization names to three databases containing names
+of educational institutions:
+
+* ETER (dataset downloaded on 26th July, 2021)
+* Carnegie Classification (dataset downloaded on 1st September, 2021)
+* Webometrics Ranking (we scraped the complete website on 19th July, 2021)
+
+To do so, we pre-processed the names of the educational institutions in these
+datasets according to the steps listed in :ref:`section-cleaning-label`, and
+matched our organization names against them, following the procedure described in
+:ref:`section-matching-bus-reg-label`--i.e., in this step the *candidates*
+where ETER, Carnegie and Webometrics Ranking pre-processed names.
+
+.. admonition:: Concordance table
+
+  Many organizations in our database were successfully matched against multiple
+  external sources (e.g., KU Leuven is matched to Orbis, ETER and Webometrics).
+  To facilitate the future use of the matched data we built table
+  :ref:`tables-T01_org_concordance-label`, which links *org_id's* with the id's of
+  multiple external databases.
+
+.. _section-matching-job-titles-label:
+
+Matching job titles
+---------------------
+
+The pre-processing of the (raw) job title strings posed an additional challenge:
+a large share of job title strings contain more than one role (e.g.,
+"Co-founder and CEO", "Technical Sales and Software Engineer", "COO, Board
+member"). We dealt with this issue in several steps. First, we split the raw
+string using the following
+characters/terms: {','; ' & '; ' - '; ' and '}. Second, we applied the steps
+in section :ref:`section-cleaning-label` to the split strings. After parsing,
+one job title in its raw form (in field *exp_jt*, identified also by
+*jt_raw_id*) may correspond to more than one job title in its parsed form
+(in field *jt_parsed*, identified also by *jt_parsed_id*).
+
+.. note:: The correspondence between raw and parsed job titles is in table
+  :ref:`tables-W02_job_titles_raw_parsed-label`
+
+Third, we disambiguated the parsed job titles (i.e., split and pre-processed)
+following the procedure in :ref:`section-matching-bus-reg-label`, matching them
+against a dictionary composed by all the job titles in the O*NET Database.
+More specifically, we used the alternate job titles in O*NET (identified by
+the field *Alternate Title* in the **Alternate titles** table). Note that the
+alternate titles were also pre-processed according to :ref:`section-cleaning-label`.
+
+Fourth, and finally, we performed extensive manual revision and correction of
+the parsed job title strings that could not be matched to O*NET.
+
+.. warning:: PhD, courses and other education
+
+  Many individuals in our database list their phd's and other education (such as courses
+  and training, presumably with job-market relevance) inside work experience. Our
+  meticulous parsing and classification steps allowed us to spot such entries,
+  and we reclassified them as education.
+
+.. admonition:: From raw job title to O*NET SOC code
+
+  Merge W02_job_titles_raw_parsed with W03_job_titles_parsed_onet on
+  *jt_parsed_id* to obtain the O*NET SOC code(s) matched to each raw job title.
+
+Creating categorical variables from job titles and study programs
+=================================================================
+
+Job titles
+----------
+
+We followed the methodology in :cite:t:`chen2016skill` to classify the parsed
+job titles into:
+
+* Job ranks: top management, management, sub-management and non-management
+* Functional areas: Business and Management, Production, R&D and Engineering,
+  Personnel, Sales and Marketing, Accounting and Finance
+* Other indicators (e.g., *engineering role*\, *medical role*\, etc.)
+
+The cited methodology uses sets of keywords linked to each of the fields above
+to assign a job title string to one class if two conditions are
+fulfilled:
+
+* the string contains one or more keywords linked to a class,
+* the string does not contain a keyword in a set of exclusions, particular to that class.
+
+For instance, we classify job title strings containing terms such as *sales*, *key account* or
+*marketer* into **Sales and Marketing**. However, we abstain from doing so
+if the string also contains a term such as *bond* (e.g., in *bond sales*\).
+
+Finally, note that we grouped the job rank, functional areas and *other*
+classifications at the level of the raw job title, and not the parsed job titles.
+Hence, tables :ref:`tables-W05_job_titles_job_rank-label`,
+:ref:`tables-W06_job_titles_functional_areas-label` and
+:ref:`tables-W07_job_titles_other_indicators-label` link the *jt_raw_id*
+to the classifications assigned following the procedure in this section.
+
+.. note::
+
+  We used the dictionary provided by :cite:t:`chen2016skill` and expanded it with
+  new terms after careful examination of the job title string in our database. A
+  copy of the dictionary we used in this step is available in
+  './03_params/parse_jt_job_ranks_funct_areas_curr.xlsx'.
+
+Study programs
+--------------
+
+We parsed the *edu_prg* raw string in order to identify
+
+* the level of education of each study program (primary school, secondary school, bachelor, etc.), and
+* the field of each study program (Arts, humanities, ICT, etc.).
+
+We proceeded as follows.
+
+**Cleaning.** We applied the methodology
+in section :ref:`section-cleaning-label` to the *edu_prg* field. Additionally,
+we cleaned/harmonized the parts of the string that refer
+to the level of the study program (e.g., 'master' -> 'msc', 'Ph. d.' -> 'phd').
+The harmonized strings are stored as *edu_prg_parsed* in table
+:ref:`tables-E03_edu_programs-label`.
+
+**Levels of education.** We adapted the methodology in
+:cite:t:`chen2016skill` and created lists of words that relate to `ISCED levels of education
+<https://circabc.europa.eu/sd/a/84d88f97-9cc7-45be-963f-ed088440b04b/ISCED%202011%20Operational%20Manual.pdf>`_.
+ISCED 2011 has nine levels of educations, from level 0 to 8. We collapsed them
+into 6 different categories according to :numref:`table-isced_levels-label`.
+
+.. _table-isced_levels-label:
+
+.. table:: Table: Correspondence with ISCED levels
+
+  +-----------------------------+-------------------------------+
+  | Study level in our database | Corresponds to ISCED level(s) |
+  +=============================+===============================+
+  | Primary school              | 0, 1                          |
+  +-----------------------------+-------------------------------+
+  | Secondary school            | 2, 3                          |
+  +-----------------------------+-------------------------------+
+  | Post secondary (tertiary)   | 4, 5                          |
+  +-----------------------------+-------------------------------+
+  | Bachelor's degree           | 6                             |
+  +-----------------------------+-------------------------------+
+  | Master's degree             | 7                             |
+  +-----------------------------+-------------------------------+
+  | Doctoral degree             | 8                             |
+  +-----------------------------+-------------------------------+
+
+We used the word lists to classify *edu_prg_parsed* into study levels.
+Specifically, we assigned a study program string to a study level if two conditions are
+fulfilled:
+
+* the string contains one or more keywords linked to a level,
+* the string does not contain a keyword in a set of exclusions, particular to that level.
+
+Some study programs could not be assigned a study level as above and we coded
+them as 'other'.
+
+The following example illustrates the approach. Our algorithm parsed the raw
+string "bachelor in anthropology" "bsc in anthropology" and classified it as
+'bachelor degree' because it contains the term **bsc**.
+
+.. warning::
+
+  We reclassified all post-doctoral experience as work experience. Hence,
+  post-docs are in the experience-related tables, and not in the
+  education-related ones.
+
+.. note::
+
+  A copy of the dictionary we used in this step is available in
+  './03_params/parse_edu_isced_levels_curr.xlsx'.
+
+**Fields of education.** We classified the study programs into the fields of study defined in the
+`ISCED-F 2013 taxonomy <https://circabc.europa.eu/sd/a/286ebac6-aa7c-4ada-a42b-ff2cf3a442bf/ISCED-F%202013%20-%20Detailed%20field%20descriptions.pdf>`_.
+(see table :ref:`tables-E06_isced_fields_defs-label`). As before, we adapted the
+methodology in :cite:t:`chen2016skill` and created lists of words and tokens
+that relate to the study fields. The starting point of our word list was the
+*Appendix II: Numerical Code List* from the ISCED-F2013 report, which provides
+about 1,200 study programs that belong to the fields of
+study in the taxonomy. We expanded these lists with additional keywords
+as we explored the data.
+
+We used the word lists referred above to classify *edu_prg_parsed* into study fields.
+Specifically, we assigned a study program string to a study field if two conditions are
+fulfilled:
+
+* the string contains one or more keywords linked to a field,
+* the string does not contain a keyword in a set of exclusions, particular to that field.
+
+.. warning::
+
+  Some entrepreneurs who attended an accelerator program list them as work experience,
+  while others as education. To harmonize, we reclassified all accelerator-related
+  entries as work experience.
+
+.. note::
+
+  A copy of the dictionary we used in this step is available in
+  './03_params/parse_edu_isced_fields_curr.xlsx'.
+
+Other variables
+===============
+
+Age
+---
+
+We use disambiguated schooling data to estimate entrepreneurs' birth years and
+derive the age at the time of work experience, education and cofounding. In this step we
+combine information from the study level and the starting or ending year of
+each entry in the education table. First, for each education entry with ISCED level
+and at least start or end year of education program, we used the mapping rule in table
+:numref:`table-other_vars_age-label` to estimate the birth year of the entrepreneur.
+For example, if Jane started secondary school in 2005, we estimate she was
+12 at the time, and impute a birth year of 1993. Second, if an entrepreneur has many
+education entries in the education table, this step may produce different
+estimates of birth year. In such case, we take the minimum of all estimated
+birth years of each entrepreneur. Third, we combined the (minimum) estimated
+birth year and the cofounding year to estimate the age of the entrepreneur
+at the moment of cofounding a firm.
+
+.. _table-other_vars_age-label:
+
+.. table:: Mapping rule to estimate an entrepreneur's birth year
+
+  +-----------------------------+-----------+---------+
+  | Study level                 | Start age | End age |
+  +=============================+===========+=========+
+  | Primary school              | 6         | 11      |
+  +-----------------------------+-----------+---------+
+  | Secondary school            | 12        | 18      |
+  +-----------------------------+-----------+---------+
+  | Post secondary (tertiary)   | 19        | 21      |
+  +-----------------------------+-----------+---------+
+  | Bachelor's degree           | 19        | 21      |
+  +-----------------------------+-----------+---------+
+  | Master's degree             | 22        | 23      |
+  +-----------------------------+-----------+---------+
+  | Doctoral degree             | 25        | N/A     |
+  +-----------------------------+-----------+---------+
+
+Age
+---
+
+.. bibliography::

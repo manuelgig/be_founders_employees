@@ -1,0 +1,6 @@
+########
+Download
+########
+
+You can download the latest release `here <https://shorturl.at/pqSY3>`_
+(elevation required, please email manuel.gigena@kuleuven.be to request access).

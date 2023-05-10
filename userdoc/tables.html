@@ -1,0 +1,2740 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Description of tables &mdash; be_founders 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/mystyle.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Using the SQLite db" href="sql_main.html" />
+    <link rel="prev" title="3.2.2. Data parsing" href="methodology/parsing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> be_founders
+            <img src="../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="user_main.html">User Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">1. The <em>be_founders-employees</em> database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">2. Quick start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html">3. Methodology</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Description of tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#schema-raw">4.1. Schema: raw</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#event-raw">4.1.1. event_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#location-raw">4.1.2. location_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organization-raw">4.1.3. organization_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organization-raw-link">4.1.4. organization_raw_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-uuid">4.1.5. person_uuid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-desc-raw">4.1.6. program_desc_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-raw">4.1.7. program_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-desc-raw">4.1.8. role_desc_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-raw">4.1.9. role_raw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-type-raw">4.1.10. role_type_raw</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#schema-main">4.2. Schema: main</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#event">4.2.1. event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gender-desc">4.2.2. gender_desc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#location">4.2.3. location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#location-coord-link">4.2.4. location_coord_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#location-link">4.2.5. location_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#org-id-uuid-link">4.2.6. org_id_uuid_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organization">4.2.7. organization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organization-link">4.2.8. organization_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-info">4.2.9. person_info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-organization-link">4.2.10. person_organization_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program">4.2.11. program</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-field">4.2.12. program_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-level">4.2.13. program_level</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#program-link">4.2.14. program_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role">4.2.15. role</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-area">4.2.16. role_area</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-area-broad">4.2.17. role_area_broad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-link">4.2.18. role_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-rank">4.2.19. role_rank</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#schema-public">4.3. Schema: public</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#employee-turnover">4.3.1. employee_turnover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-flat">4.3.2. event_flat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isced-field">4.3.3. isced_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#onet-alternate-titles">4.3.4. onet_alternate_titles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orbis">4.3.5. orbis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orbis-fin">4.3.6. orbis_fin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orbis-sector">4.3.7. orbis_sector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#org-orbis-link">4.3.8. org_orbis_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-onet-link">4.3.9. role_onet_link</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#schema-log">4.4. Schema: log</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#employee-search-results">4.4.1. employee_search_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geocoder-search">4.4.2. geocoder_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geopy-search">4.4.3. geopy_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#org-id-search">4.4.4. org_id_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#org-id-search-results">4.4.5. org_id_search_results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-download">4.4.6. person_download</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-search">4.4.7. person_search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-search-1">4.4.8. person_search_1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#person-search-2">4.4.9. person_search_2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sql_main.html">5. Using the SQLite db</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">be_founders</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="user_main.html">User Documentation</a> &raquo;</li>
+      <li><span class="section-number">4. </span>Description of tables</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/userdoc/tables.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="description-of-tables">
+<span id="tables-label"></span><h1><span class="section-number">4. </span>Description of tables<a class="headerlink" href="#description-of-tables" title="Permalink to this headline"></a></h1>
+<section id="schema-raw">
+<h2><span class="section-number">4.1. </span>Schema: raw<a class="headerlink" href="#schema-raw" title="Permalink to this headline"></a></h2>
+<section id="event-raw">
+<span id="tables-event-raw-label"></span><h3><span class="section-number">4.1.1. </span>event_raw<a class="headerlink" href="#event-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-number">Table 4.1 </span><span class="caption-text">event_raw</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>curr_role</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>date_end</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event starting date</p></td>
+</tr>
+<tr class="row-even"><td><p>date_start</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event finishing date</p></td>
+</tr>
+<tr class="row-odd"><td><p>is_exp</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the event is a work experience event and 0 if it is an education event</p></td>
+</tr>
+<tr class="row-even"><td><p>member_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>org_hire_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the event in the firm’s hiring/promotion history. Indicates the order in which the start-up hired employees.</p></td>
+</tr>
+<tr class="row-even"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-odd"><td><p>person_edu_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the education event in the education history of the employee</p></td>
+</tr>
+<tr class="row-even"><td><p>person_job_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the work event in the work history of the employee</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_location_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_person_organization_link</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_desc_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_desc_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_type_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="location-raw">
+<span id="tables-location-raw-label"></span><h3><span class="section-number">4.1.2. </span>location_raw<a class="headerlink" href="#location-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id2">
+<caption><span class="caption-number">Table 4.2 </span><span class="caption-text">location_raw</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>location_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="organization-raw">
+<span id="tables-organization-raw-label"></span><h3><span class="section-number">4.1.3. </span>organization_raw<a class="headerlink" href="#organization-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id3">
+<caption><span class="caption-number">Table 4.3 </span><span class="caption-text">organization_raw</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>organization_name_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="organization-raw-link">
+<span id="tables-organization-raw-link-label"></span><h3><span class="section-number">4.1.4. </span>organization_raw_link<a class="headerlink" href="#organization-raw-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id4">
+<caption><span class="caption-number">Table 4.4 </span><span class="caption-text">organization_raw_link</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>uuid_organization</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-uuid">
+<span id="tables-person-uuid-label"></span><h3><span class="section-number">4.1.5. </span>person_uuid<a class="headerlink" href="#person-uuid" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id5">
+<caption><span class="caption-number">Table 4.5 </span><span class="caption-text">person_uuid</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>member_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>member_uuid</p></td>
+<td><p>text</p></td>
+<td><p>WEFP person string (non-numeric-only) identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>member_uuid_alt</p></td>
+<td><p>text</p></td>
+<td><p>WEFP person numeric identifier (alternative). Some people have two identifiers, and this is a small variation from member_uuid</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program-desc-raw">
+<span id="tables-program-desc-raw-label"></span><h3><span class="section-number">4.1.6. </span>program_desc_raw<a class="headerlink" href="#program-desc-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id6">
+<caption><span class="caption-number">Table 4.6 </span><span class="caption-text">program_desc_raw</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>program_desc_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program-raw">
+<span id="tables-program-raw-label"></span><h3><span class="section-number">4.1.7. </span>program_raw<a class="headerlink" href="#program-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id7">
+<caption><span class="caption-number">Table 4.7 </span><span class="caption-text">program_raw</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>program_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-desc-raw">
+<span id="tables-role-desc-raw-label"></span><h3><span class="section-number">4.1.8. </span>role_desc_raw<a class="headerlink" href="#role-desc-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id8">
+<caption><span class="caption-number">Table 4.8 </span><span class="caption-text">role_desc_raw</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>role_desc_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-raw">
+<span id="tables-role-raw-label"></span><h3><span class="section-number">4.1.9. </span>role_raw<a class="headerlink" href="#role-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id9">
+<caption><span class="caption-number">Table 4.9 </span><span class="caption-text">role_raw</span><a class="headerlink" href="#id9" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>role_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-type-raw">
+<span id="tables-role-type-raw-label"></span><h3><span class="section-number">4.1.10. </span>role_type_raw<a class="headerlink" href="#role-type-raw" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id10">
+<caption><span class="caption-number">Table 4.10 </span><span class="caption-text">role_type_raw</span><a class="headerlink" href="#id10" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>text</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>role_type_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="schema-main">
+<h2><span class="section-number">4.2. </span>Schema: main<a class="headerlink" href="#schema-main" title="Permalink to this headline"></a></h2>
+<section id="event">
+<span id="tables-event-label"></span><h3><span class="section-number">4.2.1. </span>event<a class="headerlink" href="#event" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id11">
+<caption><span class="caption-number">Table 4.11 </span><span class="caption-text">event</span><a class="headerlink" href="#id11" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>curr_role</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>date_end</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event starting date</p></td>
+</tr>
+<tr class="row-even"><td><p>date_start</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event finishing date</p></td>
+</tr>
+<tr class="row-odd"><td><p>is_exp</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the event is a work experience event and 0 if it is an education event</p></td>
+</tr>
+<tr class="row-even"><td><p>org_hire_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the event in the firm’s hiring/promotion history. Indicates the order in which the start-up hired employees.</p></td>
+</tr>
+<tr class="row-odd"><td><p>person_edu_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the education event in the education history of the employee</p></td>
+</tr>
+<tr class="row-even"><td><p>person_job_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the work event in the work history of the employee</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_location</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_person_organization_link</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gender-desc">
+<span id="tables-gender-desc-label"></span><h3><span class="section-number">4.2.2. </span>gender_desc<a class="headerlink" href="#gender-desc" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id12">
+<caption><span class="caption-number">Table 4.12 </span><span class="caption-text">gender_desc</span><a class="headerlink" href="#id12" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gender</p></td>
+<td><p>text</p></td>
+<td><p>Entrepreneur’s gender</p></td>
+</tr>
+<tr class="row-odd"><td><p>id</p></td>
+<td><p>integer</p></td>
+<td><p>Unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="location">
+<span id="tables-location-label"></span><h3><span class="section-number">4.2.3. </span>location<a class="headerlink" href="#location" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id13">
+<caption><span class="caption-number">Table 4.13 </span><span class="caption-text">location</span><a class="headerlink" href="#id13" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ISO3166-2-lvl4</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISO3166-2-lvl5</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISO3166-2-lvl6</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>country</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>country_code</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>location_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>location_name_unidecoded</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>state</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_location</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="location-coord-link">
+<span id="tables-location-coord-link-label"></span><h3><span class="section-number">4.2.4. </span>location_coord_link<a class="headerlink" href="#location-coord-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id14">
+<caption><span class="caption-number">Table 4.14 </span><span class="caption-text">location_coord_link</span><a class="headerlink" href="#id14" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>uuid_coord</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_location</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="location-link">
+<span id="tables-location-link-label"></span><h3><span class="section-number">4.2.5. </span>location_link<a class="headerlink" href="#location-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id15">
+<caption><span class="caption-number">Table 4.15 </span><span class="caption-text">location_link</span><a class="headerlink" href="#id15" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ISO3166-2-lvl4</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISO3166-2-lvl5</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISO3166-2-lvl6</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>address</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>altitude</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>city</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>city_district</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>confidence</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>coord</p></td>
+<td><p>text</p></td>
+<td><p>Coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p>country</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>country_code</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>county</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lat</p></td>
+<td><p>double precision</p></td>
+<td><p>Latitude</p></td>
+</tr>
+<tr class="row-odd"><td><p>lng</p></td>
+<td><p>double precision</p></td>
+<td><p>Longitude</p></td>
+</tr>
+<tr class="row-even"><td><p>location_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>location_name_unidecoded</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>location_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>location_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>municipality</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ok</p></td>
+<td><p>boolean</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>quality</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>region</p></td>
+<td><p>text</p></td>
+<td><p>Entrepreneur’s region</p></td>
+</tr>
+<tr class="row-even"><td><p>score</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>state</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>state_district</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>suburb</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>town</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>text</p></td>
+<td><p>Entrepreneur’s type</p></td>
+</tr>
+<tr class="row-odd"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_coord</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_location</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_location_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_location_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>village</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="org-id-uuid-link">
+<span id="tables-org-id-uuid-link-label"></span><h3><span class="section-number">4.2.6. </span>org_id_uuid_link<a class="headerlink" href="#org-id-uuid-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id16">
+<caption><span class="caption-number">Table 4.16 </span><span class="caption-text">org_id_uuid_link</span><a class="headerlink" href="#id16" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization_unique</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="organization">
+<span id="tables-organization-label"></span><h3><span class="section-number">4.2.7. </span>organization<a class="headerlink" href="#organization" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id17">
+<caption><span class="caption-number">Table 4.17 </span><span class="caption-text">organization</span><a class="headerlink" href="#id17" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>linkedin_id_corr</p></td>
+<td><p>double precision</p></td>
+<td><p>WEFP unique numeric identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>organization_name_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_organization_unique</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="organization-link">
+<span id="tables-organization-link-label"></span><h3><span class="section-number">4.2.8. </span>organization_link<a class="headerlink" href="#organization-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id18">
+<caption><span class="caption-number">Table 4.18 </span><span class="caption-text">organization_link</span><a class="headerlink" href="#id18" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>linkedin_id_corr</p></td>
+<td><p>double precision</p></td>
+<td><p>WEFP unique numeric identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>organization_name_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization_name_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_organization_unique</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-info">
+<span id="tables-person-info-label"></span><h3><span class="section-number">4.2.9. </span>person_info<a class="headerlink" href="#person-info" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id19">
+<caption><span class="caption-number">Table 4.19 </span><span class="caption-text">person_info</span><a class="headerlink" href="#id19" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>birth_year</p></td>
+<td><p>double precision</p></td>
+<td><p>Estimated birth year of the employee</p></td>
+</tr>
+<tr class="row-odd"><td><p>curr_job_statement</p></td>
+<td><p>text</p></td>
+<td><p>The current “Job statement” displayed in the employee’s WEFP profile page</p></td>
+</tr>
+<tr class="row-even"><td><p>gender</p></td>
+<td><p>integer</p></td>
+<td><p>Entrepreneur’s gender</p></td>
+</tr>
+<tr class="row-odd"><td><p>member_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>name_comments</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>name_comments2</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>name_comments3</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>name_comments4</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>name_parsed</p></td>
+<td><p>text</p></td>
+<td><p>Institution name (parsed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>name_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-organization-link">
+<span id="tables-person-organization-link-label"></span><h3><span class="section-number">4.2.10. </span>person_organization_link<a class="headerlink" href="#person-organization-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id20">
+<caption><span class="caption-number">Table 4.20 </span><span class="caption-text">person_organization_link</span><a class="headerlink" href="#id20" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>member_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_organization_unique</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program">
+<span id="tables-program-label"></span><h3><span class="section-number">4.2.11. </span>program<a class="headerlink" href="#program" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id21">
+<caption><span class="caption-number">Table 4.21 </span><span class="caption-text">program</span><a class="headerlink" href="#id21" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program-field">
+<span id="tables-program-field-label"></span><h3><span class="section-number">4.2.12. </span>program_field<a class="headerlink" href="#program-field" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id22">
+<caption><span class="caption-number">Table 4.22 </span><span class="caption-text">program_field</span><a class="headerlink" href="#id22" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>isced_field_0</p></td>
+<td><p>bigint</p></td>
+<td><p>generic programmes and qualifications</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_1</p></td>
+<td><p>bigint</p></td>
+<td><p>education</p></td>
+</tr>
+<tr class="row-even"><td><p>isced_field_10</p></td>
+<td><p>bigint</p></td>
+<td><p>services</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_2</p></td>
+<td><p>bigint</p></td>
+<td><p>arts and humanities</p></td>
+</tr>
+<tr class="row-even"><td><p>isced_field_3</p></td>
+<td><p>bigint</p></td>
+<td><p>social sciences journalism and information</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_4</p></td>
+<td><p>bigint</p></td>
+<td><p>business administration and law</p></td>
+</tr>
+<tr class="row-even"><td><p>isced_field_5</p></td>
+<td><p>bigint</p></td>
+<td><p>natural sciences mathematics and statistics</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_6</p></td>
+<td><p>bigint</p></td>
+<td><p>information and communication technologies icts</p></td>
+</tr>
+<tr class="row-even"><td><p>isced_field_7</p></td>
+<td><p>bigint</p></td>
+<td><p>engineer manufacturing and construction</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_8</p></td>
+<td><p>bigint</p></td>
+<td><p>agriculture forestry fisheries and veterinary</p></td>
+</tr>
+<tr class="row-even"><td><p>isced_field_9</p></td>
+<td><p>bigint</p></td>
+<td><p>health and welfare</p></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_na</p></td>
+<td><p>bigint</p></td>
+<td><p>field unknown</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program-level">
+<span id="tables-program-level-label"></span><h3><span class="section-number">4.2.13. </span>program_level<a class="headerlink" href="#program-level" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id23">
+<caption><span class="caption-number">Table 4.23 </span><span class="caption-text">program_level</span><a class="headerlink" href="#id23" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bachelor</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the study program is at the bachelor level and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>master</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the study program is at the Master’s level</p></td>
+</tr>
+<tr class="row-even"><td><p>other</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>phd</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position was as a phd student and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>post_sec</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the study program was at the post-secondary (and non-university) level</p></td>
+</tr>
+<tr class="row-odd"><td><p>primary</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the study program was at the primary level</p></td>
+</tr>
+<tr class="row-even"><td><p>secondary</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the study program was at the secondary school level</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="program-link">
+<span id="tables-program-link-label"></span><h3><span class="section-number">4.2.14. </span>program_link<a class="headerlink" href="#program-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id24">
+<caption><span class="caption-number">Table 4.24 </span><span class="caption-text">program_link</span><a class="headerlink" href="#id24" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>program_cleaned</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>program_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>program_spellcheck</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>program_split</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>program_translated</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_cleaned</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_spellcheck</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_program_split</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_translated</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role">
+<span id="tables-role-label"></span><h3><span class="section-number">4.2.15. </span>role<a class="headerlink" href="#role" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id25">
+<caption><span class="caption-number">Table 4.25 </span><span class="caption-text">role</span><a class="headerlink" href="#id25" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-area">
+<span id="tables-role-area-label"></span><h3><span class="section-number">4.2.16. </span>role_area<a class="headerlink" href="#role-area" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id26">
+<caption><span class="caption-number">Table 4.26 </span><span class="caption-text">role_area</span><a class="headerlink" href="#id26" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>acco_fin</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Accounting and Finance functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>bam</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Business and Management functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>board</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 for positions in the board of a company/organization and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>mkt_sales</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Marketing and Sales functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>other</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>owner_founder</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is the owner OR the founder of the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>personnel</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Personnel/HHRR functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>production</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Production functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>rnd_eng</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to R&amp;D and Engineering functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>shareh_inv</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is a shareholder OR investor of the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-area-broad">
+<span id="tables-role-area-broad-label"></span><h3><span class="section-number">4.2.17. </span>role_area_broad<a class="headerlink" href="#role-area-broad" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id27">
+<caption><span class="caption-number">Table 4.27 </span><span class="caption-text">role_area_broad</span><a class="headerlink" href="#id27" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>accelerator</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position/role was in an accelerator program and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>accounting</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Accounting functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>board</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 for positions in the board of a company/organization and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>consulting</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the  job title indicates this was a position as a consultant</p></td>
+</tr>
+<tr class="row-even"><td><p>course_education</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to a course and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>cust_service</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to customer service</p></td>
+</tr>
+<tr class="row-even"><td><p>engineer</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to an engineering role and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>entrepreneur</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title includes the term ‘entrepreneur’ and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>finance</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to positions in Finance</p></td>
+</tr>
+<tr class="row-odd"><td><p>founder</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is the founder of the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>gm</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to a role in “general management” and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>independent</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to an independent/freelance role and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>investor</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is an investor in the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>it</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to a job in IT</p></td>
+</tr>
+<tr class="row-even"><td><p>jobst_intern</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position was as job student/intern and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>legal</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title refers to a job in Legal</p></td>
+</tr>
+<tr class="row-even"><td><p>medical</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 for medical-related job roles and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>mkt</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title is in Marketing and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>no_functional_area</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title was not classified in any functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>owner</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is the owner of the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>pers</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>phd</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position was as a phd student and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>postdoc</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position was a post-doc and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>pr</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Public Relations area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>prod</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Production area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>research</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the position was as researcher and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>rnd</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to R&amp;D functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>sales</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>shareholder</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the entrepreneur is a shareholder of the org_id and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>strategy</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title belongs to Strategy functional area and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>teaching</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 for teaching job positions and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>volunteer</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job position was a volunteer job and 0 otherwise</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-link">
+<span id="tables-role-link-label"></span><h3><span class="section-number">4.2.18. </span>role_link<a class="headerlink" href="#role-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id28">
+<caption><span class="caption-number">Table 4.28 </span><span class="caption-text">role_link</span><a class="headerlink" href="#id28" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>role_cleaned</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role_onet_clean</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>role_spellcheck</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role_split</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>role_translated</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_cleaned</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_onet_clean</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_spellcheck</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_split</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_translated</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-rank">
+<span id="tables-role-rank-label"></span><h3><span class="section-number">4.2.19. </span>role_rank<a class="headerlink" href="#role-rank" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id29">
+<caption><span class="caption-number">Table 4.29 </span><span class="caption-text">role_rank</span><a class="headerlink" href="#id29" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>mgmt</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title is in management and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>non_mgmt</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title is not in managerial level and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>submgmt</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title is in sub-management and 0 otherwise</p></td>
+</tr>
+<tr class="row-odd"><td><p>top_mgmt</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the job title is in top management and 0 otherwise</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="schema-public">
+<h2><span class="section-number">4.3. </span>Schema: public<a class="headerlink" href="#schema-public" title="Permalink to this headline"></a></h2>
+<section id="employee-turnover">
+<span id="tables-employee-turnover-label"></span><h3><span class="section-number">4.3.1. </span>employee_turnover<a class="headerlink" href="#employee-turnover" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id30">
+<caption><span class="caption-number">Table 4.30 </span><span class="caption-text">employee_turnover</span><a class="headerlink" href="#id30" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>exits</p></td>
+<td><p>bigint</p></td>
+<td><p>Number of employees that left the firm in the focal year</p></td>
+</tr>
+<tr class="row-odd"><td><p>hires</p></td>
+<td><p>bigint</p></td>
+<td><p>Number of employees who joined the firm in the focal year (i.e., new employees)</p></td>
+</tr>
+<tr class="row-even"><td><p>hires_internal</p></td>
+<td><p>bigint</p></td>
+<td><p>Number of internal hires</p></td>
+</tr>
+<tr class="row-odd"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-even"><td><p>roles_end</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>roles_start</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>workforce</p></td>
+<td><p>bigint</p></td>
+<td><p>Number of employees at the end of the focal year, calculated as the cumulative sum of (external) hires minus employee exits</p></td>
+</tr>
+<tr class="row-odd"><td><p>year</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="event-flat">
+<span id="tables-event-flat-label"></span><h3><span class="section-number">4.3.2. </span>event_flat<a class="headerlink" href="#event-flat" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id31">
+<caption><span class="caption-number">Table 4.31 </span><span class="caption-text">event_flat</span><a class="headerlink" href="#id31" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>age_end</p></td>
+<td><p>integer</p></td>
+<td><p>Estimated age at the beginning of the event</p></td>
+</tr>
+<tr class="row-odd"><td><p>age_start</p></td>
+<td><p>integer</p></td>
+<td><p>Estimated age at the end of the event</p></td>
+</tr>
+<tr class="row-even"><td><p>birth_year</p></td>
+<td><p>integer</p></td>
+<td><p>Estimated birth year of the employee</p></td>
+</tr>
+<tr class="row-odd"><td><p>country_code</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>curr_role</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>date_end</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event starting date</p></td>
+</tr>
+<tr class="row-even"><td><p>date_start</p></td>
+<td><p>timestamp without time zone</p></td>
+<td><p>Event finishing date</p></td>
+</tr>
+<tr class="row-odd"><td><p>edu_time_to_first_edu_days</p></td>
+<td><p>double precision</p></td>
+<td><p>Number of days between the beginning of the education event and the employee’ s first education event</p></td>
+</tr>
+<tr class="row-even"><td><p>edu_time_to_first_exp_days</p></td>
+<td><p>double precision</p></td>
+<td><p>Number of days between the beginning of the education event and the employee’ s first work experience event</p></td>
+</tr>
+<tr class="row-odd"><td><p>event_tenure</p></td>
+<td><p>double precision</p></td>
+<td><p>Duration of the event (in days)</p></td>
+</tr>
+<tr class="row-even"><td><p>exp_avg_tenure_prev_roles</p></td>
+<td><p>double precision</p></td>
+<td><p>Average tenure in the previous roles</p></td>
+</tr>
+<tr class="row-odd"><td><p>exp_nr_prev_roles</p></td>
+<td><p>double precision</p></td>
+<td><p>Number of previous roles</p></td>
+</tr>
+<tr class="row-even"><td><p>exp_time_to_first_edu_days</p></td>
+<td><p>double precision</p></td>
+<td><p>Number of days between the beginning of the work experience event and the employee’ s first education event</p></td>
+</tr>
+<tr class="row-odd"><td><p>exp_time_to_first_exp_days</p></td>
+<td><p>double precision</p></td>
+<td><p>Number of days between the beginning of the work experience event and the employee’ s work experience event</p></td>
+</tr>
+<tr class="row-even"><td><p>gender</p></td>
+<td><p>integer</p></td>
+<td><p>Entrepreneur’s gender</p></td>
+</tr>
+<tr class="row-odd"><td><p>is_exp</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the event is a work experience event and 0 if it is an education event</p></td>
+</tr>
+<tr class="row-even"><td><p>location_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>member_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>org_hire_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the event in the firm’s hiring/promotion history. Indicates the order in which the start-up hired employees.</p></td>
+</tr>
+<tr class="row-odd"><td><p>org_role_area_start_seq</p></td>
+<td><p>integer</p></td>
+<td><p>Relative position of the event in the firm’s hiring/promotion history in a field/area. Indicates the order in which the start-up hired employees in a given field/area.</p></td>
+</tr>
+<tr class="row-even"><td><p>org_role_rank_start_seq</p></td>
+<td><p>integer</p></td>
+<td><p>Relative position of the event in the firm’s hiring/promotion history in a rank. Indicates the order in which the start-up hired employees in a given rank.</p></td>
+</tr>
+<tr class="row-odd"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-even"><td><p>person_edu_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the education event in the education history of the employee</p></td>
+</tr>
+<tr class="row-odd"><td><p>person_job_seq</p></td>
+<td><p>double precision</p></td>
+<td><p>Relative position of the work event in the work history of the employee</p></td>
+</tr>
+<tr class="row-even"><td><p>program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role_area</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role_rank</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>role_type_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>uuid_location</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_organization_unique</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_person_organization_link</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_program_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_type_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="isced-field">
+<span id="tables-isced-field-label"></span><h3><span class="section-number">4.3.3. </span>isced_field<a class="headerlink" href="#isced-field" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id32">
+<caption><span class="caption-number">Table 4.32 </span><span class="caption-text">isced_field</span><a class="headerlink" href="#id32" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>isced_field_id</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>isced_field_title</p></td>
+<td><p>text</p></td>
+<td><p>ISCED field description</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="onet-alternate-titles">
+<span id="tables-onet-alternate-titles-label"></span><h3><span class="section-number">4.3.4. </span>onet_alternate_titles<a class="headerlink" href="#onet-alternate-titles" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id33">
+<caption><span class="caption-number">Table 4.33 </span><span class="caption-text">onet_alternate_titles</span><a class="headerlink" href="#id33" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Alternate Title</p></td>
+<td><p>text</p></td>
+<td><p>O*NET database alternate job title</p></td>
+</tr>
+<tr class="row-odd"><td><p>O*NET-SOC Code</p></td>
+<td><p>text</p></td>
+<td><p>Job title identifier from the O*NET database. It’s related to jt_parsed and jt_parsed_id in the same row.</p></td>
+</tr>
+<tr class="row-even"><td><p>Title</p></td>
+<td><p>text</p></td>
+<td><p>O*NET database job title</p></td>
+</tr>
+<tr class="row-odd"><td><p>alternate_title_parsed</p></td>
+<td><p>text</p></td>
+<td><p>O*NET database alternate job title (parsed)</p></td>
+</tr>
+<tr class="row-even"><td><p>title_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="orbis">
+<span id="tables-orbis-label"></span><h3><span class="section-number">4.3.5. </span>orbis<a class="headerlink" href="#orbis" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id34">
+<caption><span class="caption-number">Table 4.34 </span><span class="caption-text">orbis</span><a class="headerlink" href="#id34" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>branch</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>bvd_id</p></td>
+<td><p>text</p></td>
+<td><p>Orbis bvd_id</p></td>
+</tr>
+<tr class="row-even"><td><p>bvd_sector</p></td>
+<td><p>text</p></td>
+<td><p>Organization sector (Orbis)</p></td>
+</tr>
+<tr class="row-odd"><td><p>bvd_sector_id</p></td>
+<td><p>text</p></td>
+<td><p>Organization sector id (Orbis)</p></td>
+</tr>
+<tr class="row-even"><td><p>cc_iso</p></td>
+<td><p>text</p></td>
+<td><p>2-digit ISO country code of the organization</p></td>
+</tr>
+<tr class="row-odd"><td><p>company_name</p></td>
+<td><p>text</p></td>
+<td><p>Incorporated organization name (Orbis)</p></td>
+</tr>
+<tr class="row-even"><td><p>duo_bvd_id</p></td>
+<td><p>text</p></td>
+<td><p>bvd_id (Orbis) of the domestic ultimate owner of the company indicated by bvd_id (i.e., ultimate owner in the country)</p></td>
+</tr>
+<tr class="row-odd"><td><p>guo_bvd_id</p></td>
+<td><p>text</p></td>
+<td><p>bvd_id (Orbis) of the global ultimate owner of the company indicated by bvd_id</p></td>
+</tr>
+<tr class="row-even"><td><p>guo_name</p></td>
+<td><p>text</p></td>
+<td><p>Name of the global ultimate owner</p></td>
+</tr>
+<tr class="row-odd"><td><p>inactive</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nace2_core_code</p></td>
+<td><p>text</p></td>
+<td><p>Organization’s NACE2 - core code (Orbis)</p></td>
+</tr>
+<tr class="row-odd"><td><p>nace2_main_section</p></td>
+<td><p>double precision</p></td>
+<td><p>Organization’s NACE2 - main section (Orbis)</p></td>
+</tr>
+<tr class="row-even"><td><p>owndata</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>quoted</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>specialization</p></td>
+<td><p>text</p></td>
+<td><p>Organization specialization (Orbis)</p></td>
+</tr>
+<tr class="row-odd"><td><p>woco</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="orbis-fin">
+<span id="tables-orbis-fin-label"></span><h3><span class="section-number">4.3.6. </span>orbis_fin<a class="headerlink" href="#orbis-fin" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id35">
+<caption><span class="caption-number">Table 4.35 </span><span class="caption-text">orbis_fin</span><a class="headerlink" href="#id35" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BvD ID number</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Cash flow EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Current ratio</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Number of employees</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Operating revenue (Turnover) EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>P/L before tax EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>P/L for period [=Net income] EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Profit margin (%)</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ROCE using P/L before tax (%)</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ROE using P/L before tax (%)</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Shareholders funds EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Solvency ratio (Asset based) (%)</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Total assets EUR</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>org_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-even"><td><p>year</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="orbis-sector">
+<span id="tables-orbis-sector-label"></span><h3><span class="section-number">4.3.7. </span>orbis_sector<a class="headerlink" href="#orbis-sector" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id36">
+<caption><span class="caption-number">Table 4.36 </span><span class="caption-text">orbis_sector</span><a class="headerlink" href="#id36" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bvd_sector</p></td>
+<td><p>text</p></td>
+<td><p>Organization sector (Orbis)</p></td>
+</tr>
+<tr class="row-odd"><td><p>bvd_sector_id</p></td>
+<td><p>text</p></td>
+<td><p>Organization sector id (Orbis)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="org-orbis-link">
+<span id="tables-org-orbis-link-label"></span><h3><span class="section-number">4.3.8. </span>org_orbis_link<a class="headerlink" href="#org-orbis-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id37">
+<caption><span class="caption-number">Table 4.37 </span><span class="caption-text">org_orbis_link</span><a class="headerlink" href="#id37" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>bvd_id</p></td>
+<td><p>text</p></td>
+<td><p>Orbis bvd_id</p></td>
+</tr>
+<tr class="row-odd"><td><p>org_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="role-onet-link">
+<span id="tables-role-onet-link-label"></span><h3><span class="section-number">4.3.9. </span>role_onet_link<a class="headerlink" href="#role-onet-link" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id38">
+<caption><span class="caption-number">Table 4.38 </span><span class="caption-text">role_onet_link</span><a class="headerlink" href="#id38" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>O*NET-SOC Code</p></td>
+<td><p>text</p></td>
+<td><p>Job title identifier from the O*NET database. It’s related to jt_parsed and jt_parsed_id in the same row.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_role_onet_clean</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid_role_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="schema-log">
+<h2><span class="section-number">4.4. </span>Schema: log<a class="headerlink" href="#schema-log" title="Permalink to this headline"></a></h2>
+<section id="employee-search-results">
+<span id="tables-employee-search-results-label"></span><h3><span class="section-number">4.4.1. </span>employee_search_results<a class="headerlink" href="#employee-search-results" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id39">
+<caption><span class="caption-number">Table 4.39 </span><span class="caption-text">employee_search_results</span><a class="headerlink" href="#id39" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>current_org</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>folder</p></td>
+<td><p>text</p></td>
+<td><p>Local folder used to store the scraping results</p></td>
+</tr>
+<tr class="row-even"><td><p>html_file</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>loc</p></td>
+<td><p>text</p></td>
+<td><p>Location</p></td>
+</tr>
+<tr class="row-even"><td><p>member_id</p></td>
+<td><p>double precision</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>member_uuid</p></td>
+<td><p>text</p></td>
+<td><p>WEFP person string (non-numeric-only) identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>name</p></td>
+<td><p>text</p></td>
+<td><p>Full name of the entrepreneur</p></td>
+</tr>
+<tr class="row-odd"><td><p>past_org</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the search was parameterized to return only previous (i.e., non-current) roles of the employees</p></td>
+</tr>
+<tr class="row-even"><td><p>reason_results</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>role</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>round</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>search_organization_id</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>search_string</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="geocoder-search">
+<span id="tables-geocoder-search-label"></span><h3><span class="section-number">4.4.2. </span>geocoder_search<a class="headerlink" href="#geocoder-search" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id40">
+<caption><span class="caption-number">Table 4.40 </span><span class="caption-text">geocoder_search</span><a class="headerlink" href="#id40" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>address</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>confidence</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lat</p></td>
+<td><p>double precision</p></td>
+<td><p>Latitude</p></td>
+</tr>
+<tr class="row-odd"><td><p>lng</p></td>
+<td><p>double precision</p></td>
+<td><p>Longitude</p></td>
+</tr>
+<tr class="row-even"><td><p>location_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ok</p></td>
+<td><p>boolean</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>quality</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>score</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>type</p></td>
+<td><p>text</p></td>
+<td><p>Entrepreneur’s type</p></td>
+</tr>
+<tr class="row-even"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_location_parsed</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="geopy-search">
+<span id="tables-geopy-search-label"></span><h3><span class="section-number">4.4.3. </span>geopy_search<a class="headerlink" href="#geopy-search" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id41">
+<caption><span class="caption-number">Table 4.41 </span><span class="caption-text">geopy_search</span><a class="headerlink" href="#id41" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ISO3166-2-lvl4</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISO3166-2-lvl5</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISO3166-2-lvl6</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>altitude</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>city</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>city_district</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>coord</p></td>
+<td><p>text</p></td>
+<td><p>Coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p>country</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>country_code</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>county</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>lat</p></td>
+<td><p>double precision</p></td>
+<td><p>Latitude</p></td>
+</tr>
+<tr class="row-odd"><td><p>lng</p></td>
+<td><p>double precision</p></td>
+<td><p>Longitude</p></td>
+</tr>
+<tr class="row-even"><td><p>municipality</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>region</p></td>
+<td><p>text</p></td>
+<td><p>Entrepreneur’s region</p></td>
+</tr>
+<tr class="row-even"><td><p>state</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>state_district</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>suburb</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>town</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid_coord</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>village</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="org-id-search">
+<span id="tables-org-id-search-label"></span><h3><span class="section-number">4.4.4. </span>org_id_search<a class="headerlink" href="#org-id-search" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id42">
+<caption><span class="caption-number">Table 4.42 </span><span class="caption-text">org_id_search</span><a class="headerlink" href="#id42" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>curr_page</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>loc</p></td>
+<td><p>text</p></td>
+<td><p>Location</p></td>
+</tr>
+<tr class="row-even"><td><p>nr_pages</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-even"><td><p>organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>result</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="org-id-search-results">
+<span id="tables-org-id-search-results-label"></span><h3><span class="section-number">4.4.5. </span>org_id_search_results<a class="headerlink" href="#org-id-search-results" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id43">
+<caption><span class="caption-number">Table 4.43 </span><span class="caption-text">org_id_search_results</span><a class="headerlink" href="#id43" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>desc</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>filename</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>folder</p></td>
+<td><p>text</p></td>
+<td><p>Local folder used to store the scraping results</p></td>
+</tr>
+<tr class="row-odd"><td><p>linkedin_id</p></td>
+<td><p>bigint</p></td>
+<td><p>WEFP unique numeric identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>linkedin_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>loc</p></td>
+<td><p>text</p></td>
+<td><p>Location</p></td>
+</tr>
+<tr class="row-even"><td><p>loc_search</p></td>
+<td><p>text</p></td>
+<td><p>Location used to search</p></td>
+</tr>
+<tr class="row-odd"><td><p>nr_followers</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nr_results</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>organization_id</p></td>
+<td><p>text</p></td>
+<td><p>Belgian start-up unique id</p></td>
+</tr>
+<tr class="row-even"><td><p>organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>sector</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sector_loc_raw</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-download">
+<span id="tables-person-download-label"></span><h3><span class="section-number">4.4.6. </span>person_download<a class="headerlink" href="#person-download" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id44">
+<caption><span class="caption-number">Table 4.44 </span><span class="caption-text">person_download</span><a class="headerlink" href="#id44" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>experience</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the downloaded file contains work experience and 0 if it contains education background</p></td>
+</tr>
+<tr class="row-odd"><td><p>member_id</p></td>
+<td><p>integer</p></td>
+<td><p>WEFP person numeric-only identifier</p></td>
+</tr>
+<tr class="row-even"><td><p>member_uuid</p></td>
+<td><p>text</p></td>
+<td><p>WEFP person string (non-numeric-only) identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>slug</p></td>
+<td><p>text</p></td>
+<td><p>The slug of the employee’s personal WEFP page at the time of data collection (obtained from the URL)</p></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>url_scraped</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-search">
+<span id="tables-person-search-label"></span><h3><span class="section-number">4.4.7. </span>person_search<a class="headerlink" href="#person-search" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id45">
+<caption><span class="caption-number">Table 4.45 </span><span class="caption-text">person_search</span><a class="headerlink" href="#id45" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>be_only</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the person search was performed among Belgian-based WEFP users only</p></td>
+</tr>
+<tr class="row-odd"><td><p>company</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>company_name_variant</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>li_url_parsed_id</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nr_pages</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>result</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>url_people_search</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-search-1">
+<span id="tables-person-search-1-label"></span><h3><span class="section-number">4.4.8. </span>person_search_1<a class="headerlink" href="#person-search-1" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id46">
+<caption><span class="caption-number">Table 4.46 </span><span class="caption-text">person_search_1</span><a class="headerlink" href="#id46" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>be_only</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the person search was performed among Belgian-based WEFP users only</p></td>
+</tr>
+<tr class="row-odd"><td><p>company</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>company_name_variant</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>li_url_parsed_id</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nr_pages</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>result</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>url_people_search</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="person-search-2">
+<span id="tables-person-search-2-label"></span><h3><span class="section-number">4.4.9. </span>person_search_2<a class="headerlink" href="#person-search-2" title="Permalink to this headline"></a></h3>
+<table class="colwidths-given docutils align-default" id="id47">
+<caption><span class="caption-number">Table 4.47 </span><span class="caption-text">person_search_2</span><a class="headerlink" href="#id47" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 13%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>column_name</p></th>
+<th class="head"><p>data_type</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>curr_job</p></td>
+<td><p>bigint</p></td>
+<td><p>Equals 1 if the person was doing this job at the time of data collection</p></td>
+</tr>
+<tr class="row-odd"><td><p>curr_page</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>li_organization_id</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>location</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>nr_pages</p></td>
+<td><p>double precision</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>organization_name</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>result</p></td>
+<td><p>bigint</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>time</p></td>
+<td><p>timestamp without time zone</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>url</p></td>
+<td><p>text</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>uuid</p></td>
+<td><p>text</p></td>
+<td><p>Row unique identifier</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="methodology/parsing.html" class="btn btn-neutral float-left" title="3.2.2. Data parsing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sql_main.html" class="btn btn-neutral float-right" title="5. Using the SQLite db" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Manuel Gigena.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+.. _tables-label:
+
+Description of tables
+=====================
+
+Schema: raw
+-----------
+
+.. include:: tables/tables_raw.rst
+
+Schema: main
+---------------
+
+.. include:: tables/tables_main.rst
+
+Schema: public
+--------------
+
+.. include:: tables/tables_public.rst
+
+Schema: log
+-----------
+
+.. include:: tables/tables_log.rst

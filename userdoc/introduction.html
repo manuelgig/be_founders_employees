@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. The be_founders-employees database &mdash; be_founders 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/mystyle.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Quick start" href="quickstart.html" />
+    <link rel="prev" title="User Documentation" href="user_main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> be_founders
+            <img src="../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="user_main.html">User Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. The <em>be_founders-employees</em> database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data">1.1. Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample">1.2. Sample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-structure-and-contents">1.3. Database structure and contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-diagram">1.4. Database diagram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">2. Quick start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html">3. Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">4. Description of tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sql_main.html">5. Using the SQLite db</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">be_founders</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="user_main.html">User Documentation</a> &raquo;</li>
+      <li><span class="section-number">1. </span>The <em>be_founders-employees</em> database</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/userdoc/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-be-founders-employees-database">
+<h1><span class="section-number">1. </span>The <em>be_founders-employees</em> database<a class="headerlink" href="#the-be-founders-employees-database" title="Permalink to this headline"></a></h1>
+<section id="data">
+<span id="introdata-label"></span><h2><span class="section-number">1.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline"></a></h2>
+<p>The database has rich microdata about a large number (99k+) of people who
+worked for a set of Belgian start-ups (see <a class="reference internal" href="#introsample-label"><span class="std std-numref">Section 1.2</span></a> for
+information on the start-ups). The database includes nearly all the employees that
+worked for these start-ups, as well as the founders.</p>
+<p>The data source is a <strong>w</strong>ell-known <strong>e</strong>mployment-<strong>f</strong>ocused social
+media <strong>p</strong>latform (henceforth WEFP), where all the data is publicly-available.
+WEFP has two types of users: real persons and corporate persons.</p>
+<p>WEFP users who are real persons create a personal page where they share personal
+details, educational background and employment history.
+WEFP users who are corporate persons create a business page for their company,
+school, NGO, etc.
+Users of both types share posts, pictures, videos, and documents; and engage
+with other WEFP users in public, as well as private, interactions.</p>
+<p>We relied on mechanized search tools (a.k.a. scrapers or web bots) to retrieve
+information from users’ profiles. Additionally, we used machine learning tools
+to parse the data and derive indicators at the person- and start-up-level. At the
+employee-level, the database contains information on three main areas:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Individual characteristics:</dt><dd><ul class="simple">
+<li><p>Name</p></li>
+<li><p>Gender</p></li>
+<li><p>Age (etc.)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Education history:</dt><dd><ul class="simple">
+<li><p>Educational institution</p></li>
+<li><p>Study program</p></li>
+<li><p>Start/end date</p></li>
+<li><p>Location</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Work experience:</dt><dd><ul class="simple">
+<li><p>Employer</p></li>
+<li><p>Job title</p></li>
+<li><p>Start/end date of the position</p></li>
+<li><p>Location</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>At the start-up-level, the database contains rich information about personnel
+dynamics (e.g., employee entry and exit, internal promotions, etc.).</p>
+<div class="admonition-antecedent-the-be-founders-database admonition">
+<p class="admonition-title">Antecedent: The <em>be_founders</em> database</p>
+<p>The <em>be_founders</em> database contains rich microdata about the founders of a
+large set of Belgian start-ups. This includes the founders’ education and work
+experience, but also networks and co-founding links. The database includes
+start-ups’ financial information as well.</p>
+<p>Refer to the <a class="reference external" href="https://manuelgig.github.io/be_founders_documentation/">documentation</a>
+of the <em>be_founders</em> project for more information.</p>
+</div>
+</section>
+<section id="sample">
+<span id="introsample-label"></span><h2><span class="section-number">1.2. </span>Sample<a class="headerlink" href="#sample" title="Permalink to this headline"></a></h2>
+<p>We built the sample in several steps:</p>
+<ol class="arabic simple">
+<li><p>We retrieved a list of all Belgian start-ups listed in Crunchbase.</p></li>
+<li><p>We ran a mechanized search process to look up the start-ups in WEFP and
+obtain their WEFP unique identifier (<em>uuid</em>).</p></li>
+<li><p>We ran mechanized searches in WEFP to identify users who worked in at least
+one of the start-ups (either who worked in the past, or were working at the
+time of data collection, between April and December 2022).</p></li>
+<li><p>We retrieved data about the users found in step three, which is publicly
+available in WEFP; this includes, but is not limited to, work- and
+education-background data.</p></li>
+<li><p>We carefully parsed, cleaned, disambiguated, and structured
+the data obtained in step four, in order to build the employees’ complete career
+and educational trajectories. This way we identified thousands of <em>events</em> in
+the life of the employees.</p></li>
+<li><p>We used event data to build data at the start-up level.</p></li>
+</ol>
+<p>The resulting database includes the work and study careers of 99,432 employees,
+who worked for 910 Belgian start-ups. It comprises 997k events, divided into
+246k study events and 751k job market events.</p>
+<div class="admonition-events admonition" id="event-def-label">
+<p class="admonition-title">Events</p>
+<p>We define an <em>event</em> as a spell, or period, in the life of an employee during
+which she works or studies. There are two types of events:</p>
+<ul class="simple">
+<li><p>Work event (includes start/end time, employer, location, role, area/field,
+hierarchy, etc.)</p></li>
+<li><p>Study event (includes start/end time, education institution, degree type,
+area/field, etc.)</p></li>
+</ul>
+<p>We use events within and between employees and start-ups to create indicators
+about career advance, skills, networks, job creation, etc.</p>
+<p>The total (i.e., added) duration of the work event spells is 1,738,000
+years (or about 18 years per person, on average). The total duration of the
+study events is 587k years (or about 6 years per person, on average).</p>
+</div>
+<div class="admonition-start-up-work-vs-non-start-up-work admonition">
+<p class="admonition-title">Start-up work vs non-start-up work</p>
+<p>Start-up employment represents only 17% (133k) of the job market events
+(or about 20% of the recorded employment time) in the database. This suggests
+that working for start-ups is but a phase in the lives of the typical
+individual in the database, and there is great potential from using data
+phase. This is what we set out to do by collecting career and education
+background data.</p>
+</div>
+</section>
+<section id="database-structure-and-contents">
+<h2><span class="section-number">1.3. </span>Database structure and contents<a class="headerlink" href="#database-structure-and-contents" title="Permalink to this headline"></a></h2>
+<p>We developed the database using Python and PostgreSQL, and release it in
+SQLite format. The database that we release has four schemas:</p>
+<ul class="simple">
+<li><p><strong>raw:</strong> contains tables with raw (i.e., unprocessed) data that we extracted
+from the html files obtained by the web scrapers (e.g., raw company names,
+or job titles)</p></li>
+<li><p><strong>log:</strong> contains logs of the search and download steps (e.g., URL’s, time,
+etc.)</p></li>
+<li><p><strong>main:</strong> contains tables with parsed event data (e.g., events, job titles,
+education programs, locations, etc.)</p></li>
+<li><p><strong>public:</strong> contains tables with information we generated with data from the
+<strong>main</strong> schema (e.g., start-up employee turnover) as well as data from
+other sources (e.g., O*NET job titles, Orbis’ company financials)</p></li>
+</ul>
+<p>Each schema contains tables, and tables are linked to each other by a system
+of foreign keys. A description of the tables and their contents is given in
+<a class="reference internal" href="tables.html#tables-label"><span class="std std-numref">Section 4</span></a>.</p>
+</section>
+<section id="database-diagram">
+<span id="section-diagram-label"></span><h2><span class="section-number">1.4. </span>Database diagram<a class="headerlink" href="#database-diagram" title="Permalink to this headline"></a></h2>
+<p>Click on the figure below to expand the database diagram.</p>
+<a class="reference internal image-reference" href="../_images/befounders_employees_v1.0.jpg"><img alt="../_images/befounders_employees_v1.0.jpg" src="../_images/befounders_employees_v1.0.jpg" style="width: 600px;" /></a>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="user_main.html" class="btn btn-neutral float-left" title="User Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="2. Quick start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Manuel Gigena.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

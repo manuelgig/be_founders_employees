@@ -1,0 +1,77 @@
+
+
+.. _tables-E01_edu_main_parsed-label:
+
+E01_edu_main_parsed
+^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: E01_edu_main_parsed
+   :file: E01_edu_main_parsed.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-E02_edu_orgs_parsed_names-label:
+
+E02_edu_orgs_parsed_names
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: E02_edu_orgs_parsed_names
+   :file: E02_edu_orgs_parsed_names.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-E03_edu_programs-label:
+
+E03_edu_programs
+^^^^^^^^^^^^^^^^
+
+.. csv-table:: E03_edu_programs
+   :file: E03_edu_programs.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-E04_edu_programs_isced_levels-label:
+
+E04_edu_programs_isced_levels
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: E04_edu_programs_isced_levels
+   :file: E04_edu_programs_isced_levels.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-E05_edu_programs_isced_fields-label:
+
+E05_edu_programs_isced_fields
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: E05_edu_programs_isced_fields
+   :file: E05_edu_programs_isced_fields.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-E06_isced_fields_defs-label:
+
+E06_isced_fields_defs
+^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: E06_isced_fields_defs
+   :file: E06_isced_fields_defs.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

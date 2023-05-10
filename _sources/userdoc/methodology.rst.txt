@@ -1,0 +1,9 @@
+.. _methodology-label:
+
+Methodology
+###########
+
+.. toctree::
+
+    methodology/sample_data
+    methodology/construction

@@ -1,0 +1,38 @@
+
+
+.. _tables-R01_be_founders_source-label:
+
+R01_be_founders_source
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: R01_be_founders_source
+   :file: R01_be_founders_source.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-R02_edu_source-label:
+
+R02_edu_source
+^^^^^^^^^^^^^^
+
+.. csv-table:: R02_edu_source
+   :file: R02_edu_source.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-R03_exp_source-label:
+
+R03_exp_source
+^^^^^^^^^^^^^^
+
+.. csv-table:: R03_exp_source
+   :file: R03_exp_source.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

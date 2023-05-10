@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.2.2. Data parsing &mdash; be_founders 1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/mystyle.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Description of tables" href="../tables.html" />
+    <link rel="prev" title="3.2.1. Data collection" href="collection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> be_founders
+            <img src="../../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../user_main.html">User Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">1. The <em>be_founders-employees</em> database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html">2. Quick start</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../methodology.html">3. Methodology</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sample_data.html">3.1. Sample and primary data sources</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="construction.html">3.2. Construction of the dataset</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="collection.html">3.2.1. Data collection</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">3.2.2. Data parsing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">4. Description of tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql_main.html">5. Using the SQLite db</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">be_founders</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../user_main.html">User Documentation</a> &raquo;</li>
+          <li><a href="../methodology.html"><span class="section-number">3. </span>Methodology</a> &raquo;</li>
+          <li><a href="construction.html"><span class="section-number">3.2. </span>Construction of the dataset</a> &raquo;</li>
+      <li><span class="section-number">3.2.2. </span>Data parsing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/userdoc/methodology/parsing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-parsing">
+<span id="data-parsing-label"></span><h1><span class="section-number">3.2.2. </span>Data parsing<a class="headerlink" href="#data-parsing" title="Permalink to this headline"></a></h1>
+<section id="events">
+<h2><span class="section-number">3.2.2.1. </span>Events<a class="headerlink" href="#events" title="Permalink to this headline"></a></h2>
+<p>We parsed the individual html files from step <a class="reference internal" href="collection.html#retrieving-employee-data-label"><span class="std std-numref">Section 3.2.1.4</span></a>
+to extract raw event data. An event is an instance of work or education attributed
+to an employee. In its raw form, each event has the following information:</p>
+<ul class="simple">
+<li><p>The person that does the event</p></li>
+<li><p>Start / end date</p></li>
+<li><p>The organization where the person worked or studied (name and unique id)</p></li>
+<li><p>The role or job title (for work events) or the education program (for study
+events)</p></li>
+<li><p>A role or program description</p></li>
+<li><p>A location (a city, region, country, etc.)</p></li>
+</ul>
+<p>Filling in all fields is not mandatory, so some field values are missing in events.</p>
+</section>
+<section id="locations">
+<h2><span class="section-number">3.2.2.2. </span>Locations<a class="headerlink" href="#locations" title="Permalink to this headline"></a></h2>
+<p>We processed locations in two steps:</p>
+<ol class="arabic simple">
+<li><p>we harmonized location data by canonicalizing, cleaning and parsing the
+raw location strings using various Python NLP modules</p></li>
+<li><p>we looked up the “clean” location strings using <code class="xref py py-mod docutils literal notranslate"><span class="pre">geocoder</span></code>, and
+obtained their coordinates (latitude and longitude)</p></li>
+<li><p>we looked up the coordinates using <code class="xref py py-mod docutils literal notranslate"><span class="pre">geopy</span></code> to obtain disambiguated
+location meta-data (location name, country, ISO-3166-2 codes, etc.)</p></li>
+</ol>
+<p>Table <a class="reference internal" href="../tables.html#tables-location-label"><span class="std std-ref">location</span></a> includes concise location data for each
+unique location uuid. Table <a class="reference internal" href="../tables.html#tables-location-link-label"><span class="std std-ref">location_link</span></a> relates raw
+and parsed locations, and includes fine grained location data.</p>
+<blockquote>
+<div><div class="admonition-example-parsing-locations-in-brussels admonition">
+<p class="admonition-title">Example: parsing locations in Brussels</p>
+<p>Our algorithm to parse location maps the following location strings</p>
+<ul class="simple">
+<li><p>Parvis Sainte-Gudule, 1000, Bruxelles</p></li>
+<li><p>Brussels</p></li>
+<li><p>Rue de la Loi 42, 1040, Bruxelles</p></li>
+<li><p>Bourgetlaan 60, 1140, Brussel</p></li>
+</ul>
+<p>to <strong>Ville de Bruxelles - Stad Brussel</strong> (ISO-3166-2 label: “BE-BRU”)</p>
+</div>
+</div></blockquote>
+</section>
+<section id="organization-names">
+<h2><span class="section-number">3.2.2.3. </span>Organization names<a class="headerlink" href="#organization-names" title="Permalink to this headline"></a></h2>
+<p>When a person creates an event in WEFP, either work experience or education, they
+can list the organization where this work event took/is taking place. If WEFP
+has a dedicated page for the organization, a link to it is provided in the event.
+This link is a URL which contains the organization’s name and unique numeric
+identifier. Hence, by parsing organization information from the events we generate
+a new mapping of organization names and their unique numeric id. For example,
+if a person creates a study event that includes KU Leuven, while displaying the
+event WEFP will show a URL containing both <strong>Katholieke Universiteit Leuven</strong> and
+<strong>3629</strong> (KU Leuven’s unique numeric id at WEFP).</p>
+<p>However, not all organizations in the database have a dedicated page at WEFP.
+When organizations have a dedicated page at WEFP, we use names, unique
+numeric id, and locations to disambiguate organization data; when they do not,
+we use only names and location data. We proceeded as follows:</p>
+<ol class="arabic simple">
+<li><p>we harmonized organization names data by canonicalizing, cleaning and parsing
+the raw organization name strings using various Python NLP modules</p></li>
+<li><p>we combined the “clean” organization names with the WEFP organization numeric
+id’s and disambiguated location data to generate disambiguated organization
+uuid’s</p></li>
+</ol>
+<p>Table <a class="reference internal" href="../tables.html#tables-organization-label"><span class="std std-ref">organization</span></a> contains the organization names
+and WEFP numeric ids, whereas a row in table <a class="reference internal" href="../tables.html#tables-organization-link-label"><span class="std std-ref">organization_link</span></a>
+connects raw and parsed organization names.</p>
+</section>
+<section id="job-titles">
+<span id="section-job-titles-label"></span><h2><span class="section-number">3.2.2.4. </span>Job titles<a class="headerlink" href="#job-titles" title="Permalink to this headline"></a></h2>
+<p>We processed job title (also referred as job role) strings to harmonize them,
+but also to extract from them the job’s functional area (e.g., accounting,
+marketing, HR, etc.) and rank (e.g., top management, mid-management,
+non-management). We proceeded as follows:</p>
+<ol class="arabic simple">
+<li><p>we harmonized job titles by canonicalizing, cleaning and parsing the raw
+job title strings using various Python NLP modules</p></li>
+<li><p>we used <code class="xref py py-mod docutils literal notranslate"><span class="pre">TextBlob</span></code> to correct spelling mistakes</p></li>
+<li><p>when a single job title string contained two or more comma-separated parts
+(e.g., “.NET developer, team leader”; “accounts executive, internship”)
+we processed each part separately</p></li>
+<li><p>to deal with job titles in languages other than English we used
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">polyglot</span></code> to detect their language, and <code class="xref py py-mod docutils literal notranslate"><span class="pre">translate-api</span></code>
+to get their English translation</p></li>
+<li><p>we matched the clean, spell-checked, and translated job titles against the
+“Alternate [job] titles” database provided by the O*NET project. This helped
+us to further disambiguate the job titles, but also to match them to a
+rich external database with job skills, tasks, ranks, etc.</p></li>
+</ol>
+<section id="extracting-job-ranks-and-functional-areas">
+<h3><span class="section-number">3.2.2.4.1. </span>Extracting job ranks and functional areas<a class="headerlink" href="#extracting-job-ranks-and-functional-areas" title="Permalink to this headline"></a></h3>
+<p>We followed the methodology in <span id="id1">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> to classify the parsed
+job titles into:</p>
+<ul class="simple">
+<li><p>Job ranks: top management, management, sub-management and non-management</p></li>
+<li><p>Functional areas: Business and Management, Production, R&amp;D and Engineering,
+Personnel, Sales and Marketing, Accounting and Finance</p></li>
+<li><p>Other indicators (e.g., <em>engineering role</em>, <em>medical role</em>, etc.)</p></li>
+</ul>
+<p>The cited methodology uses sets of keywords linked to each of the fields above
+to assign a job title string to one class if two conditions are
+fulfilled:</p>
+<ul class="simple">
+<li><p>the string contains one or more keywords linked to a class,</p></li>
+<li><p>the string does not contain a keyword in a set of exclusions, particular to
+that class.</p></li>
+</ul>
+<p>For instance, we classify job title strings containing terms such as <em>sales</em>,
+<em>key account</em> or <em>marketer</em> into <strong>Sales and Marketing</strong>. However, we abstain
+from doing so if the string also contains a term such as <em>bond</em> (e.g., in
+<em>bond sales</em>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We used the dictionary provided by <span id="id2">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> and expanded it with
+new terms after careful examination of the job title string in our database.</p>
+</div>
+</section>
+</section>
+<section id="study-programs">
+<h2><span class="section-number">3.2.2.5. </span>Study programs<a class="headerlink" href="#study-programs" title="Permalink to this headline"></a></h2>
+<p>We parsed the <em>edu_prg</em> raw string in order to identify</p>
+<ul class="simple">
+<li><p>the level of education of each study program (primary school, secondary
+school, bachelor, etc.), and</p></li>
+<li><p>the field of each study program (Arts, humanities, ICT, etc.).</p></li>
+</ul>
+<p>We proceeded as follows:</p>
+<ol class="arabic simple">
+<li><p>we harmonized program titles by canonicalizing, cleaning and parsing the raw
+strings using various Python NLP modules</p></li>
+<li><p>we used <code class="xref py py-mod docutils literal notranslate"><span class="pre">TextBlob</span></code> to correct spelling mistakes</p></li>
+<li><p>when a single program title string contained two or more comma-separated parts
+(e.g., “1998, Mécanique, Electronique”; “Algemeen Secundair Onderwijs,
+Economie Moderne Talen”) we processed each part separately</p></li>
+<li><p>to deal with program titles in languages other than English we used
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">polyglot</span></code> to detect their language, and <code class="xref py py-mod docutils literal notranslate"><span class="pre">translate-api</span></code>
+to get their English translation</p></li>
+<li><p>we developed tools to detect, clean and harmonize the parts of the string
+that refer to the level of the study program (e.g., ‘master’ -&gt; ‘msc’,
+‘Ph. d.’ -&gt; ‘phd’)</p></li>
+</ol>
+<section id="extracting-education-level-and-field">
+<h3><span class="section-number">3.2.2.5.1. </span>Extracting education level and field<a class="headerlink" href="#extracting-education-level-and-field" title="Permalink to this headline"></a></h3>
+<p><strong>Education level.</strong> We adapted the methodology in <span id="id3">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> and created lists of words
+that relate to <a class="reference external" href="https://circabc.europa.eu/sd/a/84d88f97-9cc7-45be-963f-ed088440b04b/ISCED%202011%20Operational%20Manual.pdf">ISCED levels of education</a>.
+ISCED 2011 has nine levels of educations, from level 0 to 8. We collapsed them
+into 6 different categories according to <a class="reference internal" href="#table-isced-levels-label"><span class="std std-numref">Table 3.1</span></a>.</p>
+<span id="table-isced-levels-label"></span><table class="docutils align-default" id="id7">
+<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Table: Correspondence with ISCED levels</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Study level in our database</p></th>
+<th class="head"><p>Corresponds to ISCED level(s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Primary school</p></td>
+<td><p>0, 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secondary school</p></td>
+<td><p>2, 3</p></td>
+</tr>
+<tr class="row-even"><td><p>Post secondary (tertiary)</p></td>
+<td><p>4, 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bachelor’s degree</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>Master’s degree</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p>Doctoral degree</p></td>
+<td><p>8</p></td>
+</tr>
+</tbody>
+</table>
+<p>We used the word lists to classify the clean program title strings into study
+levels. Specifically, we assigned a study program string to a study level if
+two conditions are fulfilled:</p>
+<ul class="simple">
+<li><p>the string contains one or more keywords linked to a level,</p></li>
+<li><p>the string does not contain a keyword in a set of exclusions, particular to
+that level.</p></li>
+</ul>
+<p>Some study programs could not be assigned a study level as above and we coded
+them as ‘other’.</p>
+<p>The following example illustrates the approach. Our algorithm parsed the raw
+string “bachelor in anthropology” “bsc in anthropology” and classified it as
+‘bachelor degree’ because it contains the term <strong>bsc</strong>.</p>
+<p><strong>Education field.</strong> We classified the study programs into the fields of study
+defined in the
+<a class="reference external" href="https://circabc.europa.eu/sd/a/286ebac6-aa7c-4ada-a42b-ff2cf3a442bf/ISCED-F%202013%20-%20Detailed%20field%20descriptions.pdf">ISCED-F 2013 taxonomy</a>.
+As before, we adapted the
+methodology in <span id="id4">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> and created lists of words and tokens
+that relate to the study fields. The starting point of our word list was the
+<em>Appendix II: Numerical Code List</em> from the ISCED-F2013 report, which provides
+about 1,200 study programs that belong to the fields of
+study in the taxonomy. We expanded these lists with additional keywords
+as we explored the data.</p>
+<p>We used the word lists referred above to classify the parsed program titles
+into study fields. Specifically, we assigned a study program string to a study
+field if two conditions are fulfilled:</p>
+<ul class="simple">
+<li><p>the string contains one or more keywords linked to a field,</p></li>
+<li><p>the string does not contain a keyword in a set of exclusions, particular
+to that field.</p></li>
+</ul>
+</section>
+</section>
+<section id="age">
+<h2><span class="section-number">3.2.2.6. </span>Age<a class="headerlink" href="#age" title="Permalink to this headline"></a></h2>
+<p>We use disambiguated schooling data to estimate entrepreneurs’ birth years and
+derive the age at the time of work experience, education and cofounding. In this step we
+combine information from the study level and the starting or ending year of
+each entry in the education table. First, for each education entry with ISCED level
+and at least start or end year of education program, we used the mapping rule in table
+<a class="reference internal" href="#table-other-vars-age-label"><span class="std std-numref">Table 3.2</span></a> to estimate the birth year of the entrepreneur.
+For example, if Jane started secondary school in 2005, we estimate she was
+12 at the time, and impute a birth year of 1993. Second, if an entrepreneur has many
+education entries in the education table, this step may produce different
+estimates of birth year. In such case, we take the minimum of all estimated
+birth years of each entrepreneur. Third, we combined the (minimum) estimated
+birth year and the cofounding year to estimate the age of the entrepreneur
+at the moment of cofounding a firm.</p>
+<span id="table-other-vars-age-label"></span><table class="docutils align-default" id="id8">
+<caption><span class="caption-number">Table 3.2 </span><span class="caption-text">Mapping rule to estimate an entrepreneur’s birth year</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 59%" />
+<col style="width: 22%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Study level</p></th>
+<th class="head"><p>Start age</p></th>
+<th class="head"><p>End age</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Primary school</p></td>
+<td><p>6</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>Secondary school</p></td>
+<td><p>12</p></td>
+<td><p>18</p></td>
+</tr>
+<tr class="row-even"><td><p>Post secondary (tertiary)</p></td>
+<td><p>19</p></td>
+<td><p>21</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bachelor’s degree</p></td>
+<td><p>19</p></td>
+<td><p>21</p></td>
+</tr>
+<tr class="row-even"><td><p>Master’s degree</p></td>
+<td><p>22</p></td>
+<td><p>23</p></td>
+</tr>
+<tr class="row-odd"><td><p>Doctoral degree</p></td>
+<td><p>25</p></td>
+<td><p>N/A</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gender">
+<h2><span class="section-number">3.2.2.7. </span>Gender<a class="headerlink" href="#gender" title="Permalink to this headline"></a></h2>
+<p>We used <code class="xref py py-mod docutils literal notranslate"><span class="pre">gender-guesser</span></code> on the raw person names to guess
+the gender of the employees. The package takes a person name and classifies is
+into one of five categories: male, female, mostly_male, mostly_female, andy
+(androgynous, when the name has the same probability to be male than to
+be female), and unknown.</p>
+<p>We reclassified “mostly_female” as “female” and “mostly_male” as “male”.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our current algorithm cannot guess the gender of about 9% of the person names,
+we are working to improve the coverage in future versions. Please have in
+mind this figure if you undertake any analysis that relies on the
+gender classification.</p>
+</div>
+<p id="id5"><dl class="citation">
+<dt class="label" id="id6"><span class="brackets">CT16</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>)</span></dt>
+<dd><p>Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. <em>Entrepreneurship Theory and Practice</em>, 40(2):289–305, 2016.</p>
+</dd>
+</dl>
+</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="collection.html" class="btn btn-neutral float-left" title="3.2.1. Data collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tables.html" class="btn btn-neutral float-right" title="4. Description of tables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Manuel Gigena.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

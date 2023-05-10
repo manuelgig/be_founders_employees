@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.1. Sample and primary data sources &mdash; be_founders 1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/mystyle.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Construction of the dataset" href="construction.html" />
+    <link rel="prev" title="3. Methodology" href="../methodology.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> be_founders
+            <img src="../../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../user_main.html">User Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../introduction.html">1. The <em>be_founders-employees</em> database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html">2. Quick start</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../methodology.html">3. Methodology</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">3.1. Sample and primary data sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="construction.html">3.2. Construction of the dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tables.html">4. Description of tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sql_main.html">5. Using the SQLite db</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">be_founders</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../user_main.html">User Documentation</a> &raquo;</li>
+          <li><a href="../methodology.html"><span class="section-number">3. </span>Methodology</a> &raquo;</li>
+      <li><span class="section-number">3.1. </span>Sample and primary data sources</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/userdoc/methodology/sample_data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sample-and-primary-data-sources">
+<span id="sample-data-label"></span><h1><span class="section-number">3.1. </span>Sample and primary data sources<a class="headerlink" href="#sample-and-primary-data-sources" title="Permalink to this headline"></a></h1>
+<p>We built the sample in several steps:</p>
+<ol class="arabic simple">
+<li><p>We retrieved a list of all Belgian start-ups listed in CrunchBase.</p></li>
+<li><p>We ran a mechanized search process to look up the start-ups in WEFP and
+obtain their WEFP unique identifier (<em>uuid</em>).</p></li>
+<li><p>We ran mechanized searches in WEFP to identify users who worked in at least
+one of the start-ups (either who worked in the past, or were working at the
+time of data collection, between April and December 2022).</p></li>
+<li><p>We retrieved data about the users found in step three, which is publicly
+available in WEFP; this includes, but is not limited to, work- and
+education-background data.</p></li>
+<li><p>We carefully parsed, cleaned, disambiguated, and structured
+the data obtained in step four, in order to build the employees’ complete career
+and educational trajectories. This way we identified thousands of <em>events</em> in
+the life of the employees.</p></li>
+<li><p>We used event data to build data at the start-up level.</p></li>
+</ol>
+<p>The resulting database includes the work and study careers of 99,432 employees,
+who worked for 910 Belgian start-ups. It comprises 997k events, divided into
+246k study events and 751k job market events.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../methodology.html" class="btn btn-neutral float-left" title="3. Methodology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="construction.html" class="btn btn-neutral float-right" title="3.2. Construction of the dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Manuel Gigena.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

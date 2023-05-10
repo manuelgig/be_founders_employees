@@ -1,0 +1,103 @@
+
+
+.. _tables-W01_exp_main_parsed-label:
+
+W01_exp_main_parsed
+^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W01_exp_main_parsed
+   :file: W01_exp_main_parsed.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W02_job_titles_raw_parsed-label:
+
+W02_job_titles_raw_parsed
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W02_job_titles_raw_parsed
+   :file: W02_job_titles_raw_parsed.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W03_job_titles_parsed_onet-label:
+
+W03_job_titles_parsed_onet
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W03_job_titles_parsed_onet
+   :file: W03_job_titles_parsed_onet.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W04_job_titles_indicators_onehot-label:
+
+W04_job_titles_indicators_onehot
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W04_job_titles_indicators_onehot
+   :file: W04_job_titles_indicators_onehot.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W05_job_titles_job_rank-label:
+
+W05_job_titles_job_rank
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W05_job_titles_job_rank
+   :file: W05_job_titles_job_rank.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W06_job_titles_functional_areas-label:
+
+W06_job_titles_functional_areas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W06_job_titles_functional_areas
+   :file: W06_job_titles_functional_areas.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W07_job_titles_other_indicators-label:
+
+W07_job_titles_other_indicators
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W07_job_titles_other_indicators
+   :file: W07_job_titles_other_indicators.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-W08_exp_company_parsed_names-label:
+
+W08_exp_company_parsed_names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: W08_exp_company_parsed_names
+   :file: W08_exp_company_parsed_names.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

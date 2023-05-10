@@ -1,0 +1,79 @@
+.. _data_collection-label:
+
+Data collection
+###############
+
+Belgian start-ups in CrunchBase
+===============================
+
+We retrieved a list of all Belgian start-ups listed in CrunchBase. In this step
+we obtained both start-up names and their WEFP URLs and permalinks.
+
+Identifying and retrieving the Belgian start-ups from WEFP
+==========================================================
+
+Each company that has a profile in WEFP gets different identifiers in the
+platform:
+#. a WEFP hash-like uuid (no longer accessible to platform users),
+#. a stable numeric id which is accessible to platform users.
+
+We used the company names and URLs obtained from CrunchBase to run a mechanized
+search to obtain the WEFP stable numeric id's that correspond to each start-up
+in our database. We looked up each start-up name in WEFP and retrieved all the
+WEFP companies with the same, or similar, name. We repeated the search steps
+with different restrictions (e.g., searching among Belgian- and/or EU-based
+companies only). The result of each step in the search process is an html
+file with search results. We obtained thousands of such files and logged the
+whole process in tables :ref:`tables-org_id_search-label` and
+:ref:`tables-org_id_search_results-label`. We parsed the search results
+and used text similarity algorithms to match CrunchBase and WEFP company names,
+and to discard false positives (e.g., the search for Datacamp retrieved
+a Brazilian software company named Datacamp ltd.). Additionally, we manually
+checked the quality of the matches.
+
+As a result of this process, we could link the start-up names (strings) to
+WEFP unique numeric id's. We used the latter in the next step, searching
+for the WEFP users who worked at each start-up (as identified by their
+respective unique numeric id).
+
+Looking up the employees in WEFP
+================================
+
+We used the unique company numeric id obtained in the previous step to run
+a mechanized search for all the WEFP users who report in their public profiles
+to have worked for that company. The search produced thousands of html files,
+which we stored. We record the results of the search process in tables
+:ref:`tables-person_search_1-label` and
+:ref:`tables-person_search_2-label`.
+
+We parsed the html files and store their contents in table
+:ref:`tables-employee_search_results-label`.
+
+In this step, we obtained the names, identifiers and URLs of WEFP users linked
+to our start-ups. We also implemented algorithms to discard false positives.
+
+.. admonition:: Completeness of the search results
+
+  In WEFP, users can "connect" to each other (like becoming friends in Facebook).
+  To protect the security of WEFP users, the platform restricts the visibility
+  of users *far away* in one's social network. *Far away* is defined as a
+  fourth-degree contact or higher. When the result of a person search is a person
+  who is *far away*, WEFP informs that such person exists, but masks their name
+  and id. Hence, the coverage of the search process increases with the breadth
+  and heterogeneity of the network of the account used to search from. We
+  performed our mechanized searches using a WEFP account with more than 500
+  contacts, spanning multiple countries and industry sectors.
+
+  Around 10-15% of the search results were masked, we estimate that our database
+  includes about 85-90% of the start-up's employees.
+
+.. _retrieving_employee_data-label:
+
+Retrieving the employee individual data from WEFP
+=================================================
+
+We used the URLs and identifiers from the previous step to download employee
+work experience and education data using web scrapers. We obtained two html
+files per employee: one with work experience and one with education data.
+We stored the thousands of html files with employee data and recorded the
+process in table :ref:`tables-person_download-label`.

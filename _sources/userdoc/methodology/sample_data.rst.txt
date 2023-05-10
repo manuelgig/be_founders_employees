@@ -1,0 +1,25 @@
+.. _sample_data-label:
+
+Sample and primary data sources
+###############################
+
+We built the sample in several steps:
+
+#. We retrieved a list of all Belgian start-ups listed in CrunchBase.
+#. We ran a mechanized search process to look up the start-ups in WEFP and
+   obtain their WEFP unique identifier (*uuid*).
+#. We ran mechanized searches in WEFP to identify users who worked in at least
+   one of the start-ups (either who worked in the past, or were working at the
+   time of data collection, between April and December 2022).
+#. We retrieved data about the users found in step three, which is publicly
+   available in WEFP; this includes, but is not limited to, work- and
+   education-background data.
+#. We carefully parsed, cleaned, disambiguated, and structured
+   the data obtained in step four, in order to build the employees' complete career
+   and educational trajectories. This way we identified thousands of *events* in
+   the life of the employees.
+#. We used event data to build data at the start-up level.
+
+The resulting database includes the work and study careers of 99,432 employees,
+who worked for 910 Belgian start-ups. It comprises 997k events, divided into
+246k study events and 751k job market events.

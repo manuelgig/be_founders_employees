@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Quick start &mdash; be_founders 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/mystyle.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Methodology" href="methodology.html" />
+    <link rel="prev" title="1. The be_founders-employees database" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> be_founders
+            <img src="../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="user_main.html">User Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">1. The <em>be_founders-employees</em> database</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Quick start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#event-table">2.1. Event table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flat-tables">2.2. Flat tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="methodology.html">3. Methodology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">4. Description of tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sql_main.html">5. Using the SQLite db</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">be_founders</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="user_main.html">User Documentation</a> &raquo;</li>
+      <li><span class="section-number">2. </span>Quick start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/userdoc/quickstart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quick-start">
+<span id="quickstart-label"></span><h1><span class="section-number">2. </span>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
+<p><em>Please go quickly over</em> <a class="reference internal" href="introduction.html#introdata-label"><span class="std std-numref">Section 1.1</span></a> <em>(Data) and</em>
+<a class="reference internal" href="introduction.html#introsample-label"><span class="std std-numref">Section 1.2</span></a> <em>(Sample) before you proceed with this section.</em></p>
+<section id="event-table">
+<h2><span class="section-number">2.1. </span>Event table<a class="headerlink" href="#event-table" title="Permalink to this headline"></a></h2>
+<p>Table <a class="reference internal" href="tables.html#tables-event-label"><span class="std std-ref">event</span></a> is the main table in the database, and it
+contains the events in the lives of employees. An event is a spell, or period,
+in the life of an employee during which she works or studies (see
+<a class="reference internal" href="introduction.html#introsample-label"><span class="std std-numref">Section 1.2</span></a> for more details on how we define an event).</p>
+<div class="admonition-important admonition">
+<p class="admonition-title">Important</p>
+<p>A work experience event relates a person to an employer (or to no employer, if
+the event is a freelancer/independent one). The event table records <strong>all</strong>
+work experience events, and not only those work events related to Belgian start-ups
+in our database.</p>
+</div>
+<p>A row of <a class="reference internal" href="tables.html#tables-event-label"><span class="std std-ref">event</span></a> represents an event:</p>
+<ul class="simple">
+<li><p><em>uuid:</em> the event’s unique identifier (i.e., no two rows share the same <em>uuid</em>)</p></li>
+<li><p><em>uuid_person_organization_link:</em> a unique identifier for a
+person-organization relationship. When person A works for company B we say
+there is a person-organization relationship between A and B. Similarly, when
+person A studies at school C, we say there is a person-organization
+relationship between A and C. Table <a class="reference internal" href="tables.html#tables-person-organization-link-label"><span class="std std-ref">person_organization_link</span></a>
+records the unique person-organization links</p></li>
+<li><p><em>date_start / date_end:</em> indicate when the spell started and finished.
+Some events are missing both values (if the starting and finishing date
+was not reported in WEFP).</p></li>
+<li><p><em>is_exp:</em> equals 1 when the event is a work experience event, and 0 when it is
+an education experience one</p></li>
+<li><p><em>curr_role:</em> equals 1 when the experience event was the <strong>current</strong> job role
+at the time of data collection (i.e., the focal person was working on this
+job). When <em>curr_role*==1, *date_end</em> has a missing value</p></li>
+<li><p><em>uuid_location:</em> unique identifier for the event location (foreign key to
+table <a class="reference internal" href="tables.html#tables-location-label"><span class="std std-ref">location</span></a>)</p></li>
+<li><p><em>uuid_role_parsed / uuid_program_parsed:</em> unique identifier for the focal
+event’s role or program title. They are foreign keys to tables
+<a class="reference internal" href="tables.html#tables-role-label"><span class="std std-ref">role</span></a> and <a class="reference internal" href="tables.html#tables-program-label"><span class="std std-ref">program</span></a></p></li>
+<li><p><em>person_job_seq</em>: indicates the relative position of the focal work event in the
+focal person’s career path (e.g., <em>person_job_seq</em>==1 is the person’s first
+job)</p></li>
+<li><p><em>org_hire_seq</em>: when the focal work experience event involves one of our
+Belgian start-ups, this value indicates the relative position of this event
+in the firm’s hiring/promotion history. E.g., when <em>org_hire_seq</em>==10 the
+focal event represents the 10th role started at the Belgian startup by any
+employee (if the firm only hired new employees, this would also be the 10th
+hire)</p></li>
+<li><p><em>person_edu_seq</em>: indicates the relative position of the focal study event in
+the focal person’s study path  (e.g., <em>person_edu_seq</em>==1 is the person’s first
+study event)</p></li>
+</ul>
+</section>
+<section id="flat-tables">
+<h2><span class="section-number">2.2. </span>Flat tables<a class="headerlink" href="#flat-tables" title="Permalink to this headline"></a></h2>
+<p>Given the database structure, a typical analysis will involve combining and
+merging multiple tables. To reduce such initial building costs, and to
+facilitate initial data manipulation and exploration, we include a set of
+ready-to-use tables that already combine the essential fields and indicators.</p>
+<p>Table <a class="reference internal" href="tables.html#tables-event-flat-label"><span class="std std-ref">event_flat</span></a> is an expanded version of table
+<a class="reference internal" href="tables.html#tables-event-label"><span class="std std-ref">event</span></a>. Each row represents an event, but here the data
+is enriched with location, role, program, individual, and organization data.
+As well, we include many variables that we calculated using event and related
+tables. See <a class="reference internal" href="tables.html#tables-event-flat-label"><span class="std std-ref">event_flat</span></a> to find out about these variables
+and their definitions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="1. The be_founders-employees database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="methodology.html" class="btn btn-neutral float-right" title="3. Methodology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Manuel Gigena.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

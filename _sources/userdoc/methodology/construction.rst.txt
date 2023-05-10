@@ -1,0 +1,9 @@
+.. _construction-label:
+
+Construction of the dataset
+###########################
+
+.. toctree::
+
+    collection
+    parsing

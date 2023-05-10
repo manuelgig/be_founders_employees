@@ -1,0 +1,12 @@
+
+
+.. _tables-F01_founders_info-label:
+
+F01_founders_info
+^^^^^^^^^^^^^^^^^
+
+.. csv-table:: F01_founders_info
+   :file: F01_founders_info.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

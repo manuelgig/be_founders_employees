@@ -1,0 +1,38 @@
+
+
+.. _tables-U01_exp_flat-label:
+
+U01_exp_flat
+^^^^^^^^^^^^
+
+.. csv-table:: U01_exp_flat
+   :file: U01_exp_flat.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-U02_edu_flat-label:
+
+U02_edu_flat
+^^^^^^^^^^^^
+
+.. csv-table:: U02_edu_flat
+   :file: U02_edu_flat.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1
+
+
+
+.. _tables-U03_entrepreneur_dyads-label:
+
+U03_entrepreneur_dyads
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. csv-table:: U03_entrepreneur_dyads
+   :file: U03_entrepreneur_dyads.csv
+   :delim: ;
+   :widths: 8, 4, 20
+   :header-rows: 1

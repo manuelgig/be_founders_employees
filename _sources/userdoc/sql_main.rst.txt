@@ -1,0 +1,16 @@
+Using the SQLite db
+===================
+
+You can use the database following these steps:
+
+#. Download and unzip the file with the SQLite database
+#. Open your database manager (e.g., `DBeaver <https://dbeaver.io/>`_)
+#. Click on any button/menu that reads something like "New Database Connection"
+   or "Connect to a Database"
+#. Select SQLite as connection type
+#. In the "path" or "browse" option point to the SQLite file you downloaded
+
+Db diagram
+----------
+
+Check the db diagram in :numref:`section-diagram-label`.

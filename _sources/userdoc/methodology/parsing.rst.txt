@@ -1,0 +1,273 @@
+.. _data_parsing-label:
+
+Data parsing
+############
+
+Events
+======
+
+We parsed the individual html files from step :numref:`retrieving_employee_data-label`
+to extract raw event data. An event is an instance of work or education attributed
+to an employee. In its raw form, each event has the following information:
+
+* The person that does the event
+* Start / end date
+* The organization where the person worked or studied (name and unique id)
+* The role or job title (for work events) or the education program (for study
+  events)
+* A role or program description
+* A location (a city, region, country, etc.)
+
+Filling in all fields is not mandatory, so some field values are missing in events.
+
+Locations
+=========
+
+We processed locations in two steps:
+
+#. we harmonized location data by canonicalizing, cleaning and parsing the
+   raw location strings using various Python NLP modules
+#. we looked up the "clean" location strings using :py:mod:`geocoder`, and
+   obtained their coordinates (latitude and longitude)
+#. we looked up the coordinates using :py:mod:`geopy` to obtain disambiguated
+   location meta-data (location name, country, ISO-3166-2 codes, etc.)
+
+Table :ref:`tables-location-label` includes concise location data for each
+unique location uuid. Table :ref:`tables-location_link-label` relates raw
+and parsed locations, and includes fine grained location data.
+
+ .. admonition:: Example: parsing locations in Brussels
+
+   Our algorithm to parse location maps the following location strings
+
+   * Parvis Sainte-Gudule, 1000, Bruxelles
+   * Brussels
+   * Rue de la Loi 42, 1040, Bruxelles
+   * Bourgetlaan 60, 1140, Brussel
+
+   to **Ville de Bruxelles - Stad Brussel** (ISO-3166-2 label: "BE-BRU")
+
+Organization names
+==================
+
+When a person creates an event in WEFP, either work experience or education, they
+can list the organization where this work event took/is taking place. If WEFP
+has a dedicated page for the organization, a link to it is provided in the event.
+This link is a URL which contains the organization's name and unique numeric
+identifier. Hence, by parsing organization information from the events we generate
+a new mapping of organization names and their unique numeric id. For example,
+if a person creates a study event that includes KU Leuven, while displaying the
+event WEFP will show a URL containing both **Katholieke Universiteit Leuven** and
+**3629** (KU Leuven's unique numeric id at WEFP).
+
+However, not all organizations in the database have a dedicated page at WEFP.
+When organizations have a dedicated page at WEFP, we use names, unique
+numeric id, and locations to disambiguate organization data; when they do not,
+we use only names and location data. We proceeded as follows:
+
+#. we harmonized organization names data by canonicalizing, cleaning and parsing
+   the raw organization name strings using various Python NLP modules
+#. we combined the "clean" organization names with the WEFP organization numeric
+   id's and disambiguated location data to generate disambiguated organization
+   uuid's
+
+Table :ref:`tables-organization-label` contains the organization names
+and WEFP numeric ids, whereas a row in table :ref:`tables-organization_link-label`
+connects raw and parsed organization names.
+
+.. _section-job_titles-label:
+
+Job titles
+==========
+
+We processed job title (also referred as job role) strings to harmonize them,
+but also to extract from them the job's functional area (e.g., accounting,
+marketing, HR, etc.) and rank (e.g., top management, mid-management,
+non-management). We proceeded as follows:
+
+#. we harmonized job titles by canonicalizing, cleaning and parsing the raw
+   job title strings using various Python NLP modules
+#. we used :py:mod:`TextBlob` to correct spelling mistakes
+#. when a single job title string contained two or more comma-separated parts
+   (e.g., ".NET developer, team leader"; "accounts executive, internship")
+   we processed each part separately
+#. to deal with job titles in languages other than English we used
+   :py:mod:`polyglot` to detect their language, and :py:mod:`translate-api`
+   to get their English translation
+#. we matched the clean, spell-checked, and translated job titles against the
+   "Alternate [job] titles" database provided by the O*NET project. This helped
+   us to further disambiguate the job titles, but also to match them to a
+   rich external database with job skills, tasks, ranks, etc.
+
+Extracting job ranks and functional areas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We followed the methodology in :cite:t:`chen2016skill` to classify the parsed
+job titles into:
+
+* Job ranks: top management, management, sub-management and non-management
+* Functional areas: Business and Management, Production, R&D and Engineering,
+  Personnel, Sales and Marketing, Accounting and Finance
+* Other indicators (e.g., *engineering role*\, *medical role*\, etc.)
+
+The cited methodology uses sets of keywords linked to each of the fields above
+to assign a job title string to one class if two conditions are
+fulfilled:
+
+* the string contains one or more keywords linked to a class,
+* the string does not contain a keyword in a set of exclusions, particular to
+  that class.
+
+For instance, we classify job title strings containing terms such as *sales*,
+*key account* or *marketer* into **Sales and Marketing**. However, we abstain
+from doing so if the string also contains a term such as *bond* (e.g., in
+*bond sales*\).
+
+.. note::
+
+  We used the dictionary provided by :cite:t:`chen2016skill` and expanded it with
+  new terms after careful examination of the job title string in our database.
+
+Study programs
+==============
+
+We parsed the *edu_prg* raw string in order to identify
+
+* the level of education of each study program (primary school, secondary
+  school, bachelor, etc.), and
+* the field of each study program (Arts, humanities, ICT, etc.).
+
+We proceeded as follows:
+
+#. we harmonized program titles by canonicalizing, cleaning and parsing the raw
+   strings using various Python NLP modules
+#. we used :py:mod:`TextBlob` to correct spelling mistakes
+#. when a single program title string contained two or more comma-separated parts
+   (e.g., "1998, Mécanique, Electronique"; "Algemeen Secundair Onderwijs,
+   Economie Moderne Talen") we processed each part separately
+#. to deal with program titles in languages other than English we used
+   :py:mod:`polyglot` to detect their language, and :py:mod:`translate-api`
+   to get their English translation
+#. we developed tools to detect, clean and harmonize the parts of the string
+   that refer to the level of the study program (e.g., 'master' -> 'msc',
+   'Ph. d.' -> 'phd')
+
+Extracting education level and field
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Education level.** We adapted the methodology in :cite:t:`chen2016skill` and created lists of words
+that relate to `ISCED levels of education
+<https://circabc.europa.eu/sd/a/84d88f97-9cc7-45be-963f-ed088440b04b/ISCED%202011%20Operational%20Manual.pdf>`_.
+ISCED 2011 has nine levels of educations, from level 0 to 8. We collapsed them
+into 6 different categories according to :numref:`table-isced_levels-label`.
+
+.. _table-isced_levels-label:
+
+.. table:: Table: Correspondence with ISCED levels
+
+  +-----------------------------+-------------------------------+
+  | Study level in our database | Corresponds to ISCED level(s) |
+  +=============================+===============================+
+  | Primary school              | 0, 1                          |
+  +-----------------------------+-------------------------------+
+  | Secondary school            | 2, 3                          |
+  +-----------------------------+-------------------------------+
+  | Post secondary (tertiary)   | 4, 5                          |
+  +-----------------------------+-------------------------------+
+  | Bachelor's degree           | 6                             |
+  +-----------------------------+-------------------------------+
+  | Master's degree             | 7                             |
+  +-----------------------------+-------------------------------+
+  | Doctoral degree             | 8                             |
+  +-----------------------------+-------------------------------+
+
+We used the word lists to classify the clean program title strings into study
+levels. Specifically, we assigned a study program string to a study level if
+two conditions are fulfilled:
+
+* the string contains one or more keywords linked to a level,
+* the string does not contain a keyword in a set of exclusions, particular to
+  that level.
+
+Some study programs could not be assigned a study level as above and we coded
+them as 'other'.
+
+The following example illustrates the approach. Our algorithm parsed the raw
+string "bachelor in anthropology" "bsc in anthropology" and classified it as
+'bachelor degree' because it contains the term **bsc**.
+
+**Education field.** We classified the study programs into the fields of study
+defined in the
+`ISCED-F 2013 taxonomy <https://circabc.europa.eu/sd/a/286ebac6-aa7c-4ada-a42b-ff2cf3a442bf/ISCED-F%202013%20-%20Detailed%20field%20descriptions.pdf>`_.
+As before, we adapted the
+methodology in :cite:t:`chen2016skill` and created lists of words and tokens
+that relate to the study fields. The starting point of our word list was the
+*Appendix II: Numerical Code List* from the ISCED-F2013 report, which provides
+about 1,200 study programs that belong to the fields of
+study in the taxonomy. We expanded these lists with additional keywords
+as we explored the data.
+
+We used the word lists referred above to classify the parsed program titles
+into study fields. Specifically, we assigned a study program string to a study
+field if two conditions are fulfilled:
+
+* the string contains one or more keywords linked to a field,
+* the string does not contain a keyword in a set of exclusions, particular
+  to that field.
+
+Age
+===
+
+We use disambiguated schooling data to estimate entrepreneurs' birth years and
+derive the age at the time of work experience, education and cofounding. In this step we
+combine information from the study level and the starting or ending year of
+each entry in the education table. First, for each education entry with ISCED level
+and at least start or end year of education program, we used the mapping rule in table
+:numref:`table-other_vars_age-label` to estimate the birth year of the entrepreneur.
+For example, if Jane started secondary school in 2005, we estimate she was
+12 at the time, and impute a birth year of 1993. Second, if an entrepreneur has many
+education entries in the education table, this step may produce different
+estimates of birth year. In such case, we take the minimum of all estimated
+birth years of each entrepreneur. Third, we combined the (minimum) estimated
+birth year and the cofounding year to estimate the age of the entrepreneur
+at the moment of cofounding a firm.
+
+.. _table-other_vars_age-label:
+
+.. table:: Mapping rule to estimate an entrepreneur's birth year
+
+  +-----------------------------+-----------+---------+
+  | Study level                 | Start age | End age |
+  +=============================+===========+=========+
+  | Primary school              | 6         | 11      |
+  +-----------------------------+-----------+---------+
+  | Secondary school            | 12        | 18      |
+  +-----------------------------+-----------+---------+
+  | Post secondary (tertiary)   | 19        | 21      |
+  +-----------------------------+-----------+---------+
+  | Bachelor's degree           | 19        | 21      |
+  +-----------------------------+-----------+---------+
+  | Master's degree             | 22        | 23      |
+  +-----------------------------+-----------+---------+
+  | Doctoral degree             | 25        | N/A     |
+  +-----------------------------+-----------+---------+
+
+Gender
+======
+
+We used :py:mod:`gender-guesser` on the raw person names to guess
+the gender of the employees. The package takes a person name and classifies is
+into one of five categories: male, female, mostly_male, mostly_female, andy
+(androgynous, when the name has the same probability to be male than to
+be female), and unknown.
+
+We reclassified "mostly_female" as "female" and "mostly_male" as "male".
+
+.. note::
+
+  Our current algorithm cannot guess the gender of about 9% of the person names,
+  we are working to improve the coverage in future versions. Please have in
+  mind this figure if you undertake any analysis that relies on the
+  gender classification.
+
+.. bibliography::

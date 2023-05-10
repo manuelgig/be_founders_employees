@@ -1,0 +1,72 @@
+.. _quickstart-label:
+
+Quick start
+===========
+
+*Please go quickly over* :numref:`introdata-label` *(Data) and*
+:numref:`introsample-label` *(Sample) before you proceed with this section.*
+
+Event table
+-----------
+
+Table :ref:`tables-event-label` is the main table in the database, and it
+contains the events in the lives of employees. An event is a spell, or period,
+in the life of an employee during which she works or studies (see
+:numref:`introsample-label` for more details on how we define an event).
+
+.. admonition:: Important
+
+  A work experience event relates a person to an employer (or to no employer, if
+  the event is a freelancer/independent one). The event table records **all**
+  work experience events, and not only those work events related to Belgian start-ups
+  in our database.
+
+A row of :ref:`tables-event-label` represents an event:
+
+* *uuid:* the event's unique identifier (i.e., no two rows share the same *uuid*)
+* *uuid_person_organization_link:* a unique identifier for a
+  person-organization relationship. When person A works for company B we say
+  there is a person-organization relationship between A and B. Similarly, when
+  person A studies at school C, we say there is a person-organization
+  relationship between A and C. Table :ref:`tables-person_organization_link-label`
+  records the unique person-organization links
+* *date_start / date_end:* indicate when the spell started and finished.
+  Some events are missing both values (if the starting and finishing date
+  was not reported in WEFP).
+* *is_exp:* equals 1 when the event is a work experience event, and 0 when it is
+  an education experience one
+* *curr_role:* equals 1 when the experience event was the **current** job role
+  at the time of data collection (i.e., the focal person was working on this
+  job). When *curr_role*==1, *date_end* has a missing value
+* *uuid_location:* unique identifier for the event location (foreign key to
+  table :ref:`tables-location-label`)
+* *uuid_role_parsed / uuid_program_parsed:* unique identifier for the focal
+  event's role or program title. They are foreign keys to tables
+  :ref:`tables-role-label` and :ref:`tables-program-label`
+* *person_job_seq*: indicates the relative position of the focal work event in the
+  focal person's career path (e.g., *person_job_seq*\==1 is the person's first
+  job)
+* *org_hire_seq*: when the focal work experience event involves one of our
+  Belgian start-ups, this value indicates the relative position of this event
+  in the firm's hiring/promotion history. E.g., when *org_hire_seq*\==10 the
+  focal event represents the 10th role started at the Belgian startup by any
+  employee (if the firm only hired new employees, this would also be the 10th
+  hire)
+* *person_edu_seq*: indicates the relative position of the focal study event in
+  the focal person's study path  (e.g., *person_edu_seq*\==1 is the person's first
+  study event)
+
+Flat tables
+-----------
+
+Given the database structure, a typical analysis will involve combining and
+merging multiple tables. To reduce such initial building costs, and to
+facilitate initial data manipulation and exploration, we include a set of
+ready-to-use tables that already combine the essential fields and indicators.
+
+Table :ref:`tables-event_flat-label` is an expanded version of table
+:ref:`tables-event-label`. Each row represents an event, but here the data
+is enriched with location, role, program, individual, and organization data.
+As well, we include many variables that we calculated using event and related
+tables. See :ref:`tables-event_flat-label` to find out about these variables
+and their definitions.
