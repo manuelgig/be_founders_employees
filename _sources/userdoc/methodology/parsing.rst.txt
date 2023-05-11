@@ -60,6 +60,25 @@ if a person creates a study event that includes KU Leuven, while displaying the
 event WEFP will show a URL containing both **Katholieke Universiteit Leuven** and
 **3629** (KU Leuven's unique numeric id at WEFP).
 
+.. note ::
+  Organization names are entered by WEFP users and only lightly harmonized by WEFP.
+  Hence, both **Katholieke Universiteit Leuven** and **KU Leuven** (and many
+  other variants, including spelling mistakes as well) may appear in events
+  where users worked or studied at this university.
+
+  WEFP does not fully harmonize the organization name entered by the user, and
+  this is the organization name displayed in the event. However, WEFP performs a
+  matching task in the background in order to match user-entered organization
+  names to organizations' unique WEFP pages. This is why organizations with
+  somewhat different names in the front-end are linked to the same organization
+  in the back-end (i.e., all these KU Leuven spelling variations are linked to
+  the unique id **3629**).
+
+  While useful, this step may introduce errors, if the match done by WEFP is
+  incorrect. For instance, an employee of Datacamp Brazil (a software vendor)
+  may be linked to Datacamp (the more prominent online education platform).
+
+
 However, not all organizations in the database have a dedicated page at WEFP.
 When organizations have a dedicated page at WEFP, we use names, unique
 numeric id, and locations to disambiguate organization data; when they do not,
@@ -98,6 +117,12 @@ non-management). We proceeded as follows:
    "Alternate [job] titles" database provided by the O*NET project. This helped
    us to further disambiguate the job titles, but also to match them to a
    rich external database with job skills, tasks, ranks, etc.
+
+.. note ::
+  We keep track of the parsing steps in :ref:`tables-role_link-label`
+  and :ref:`tables-program_link-label`. The first column shows the raw string,
+  whereas the columns appended with *_split*, *_spellcheck*, etc, show (from
+  left to right) the parsing process.
 
 Extracting job ranks and functional areas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -152,6 +177,13 @@ We proceeded as follows:
    that refer to the level of the study program (e.g., 'master' -> 'msc',
    'Ph. d.' -> 'phd')
 
+.. note ::
+  Please note that while we applied several NLP steps and tools to study programs,
+  we never aimed to fully disambiguate them. Rather we fixed spelling
+  mistakes, reduced string variation lightly (e.g., engineering -> enginner),
+  translated strings, and targeted the parts of the
+  string that indicate a level (e.g., primary, secondary, master).
+
 Extracting education level and field
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -179,6 +211,8 @@ into 6 different categories according to :numref:`table-isced_levels-label`.
   | Master's degree             | 7                             |
   +-----------------------------+-------------------------------+
   | Doctoral degree             | 8                             |
+  +-----------------------------+-------------------------------+
+  | Post doctoral               | NA in ISCED                   |
   +-----------------------------+-------------------------------+
 
 We used the word lists to classify the clean program title strings into study
@@ -269,5 +303,8 @@ We reclassified "mostly_female" as "female" and "mostly_male" as "male".
   we are working to improve the coverage in future versions. Please have in
   mind this figure if you undertake any analysis that relies on the
   gender classification.
+
+References
+##########
 
 .. bibliography::

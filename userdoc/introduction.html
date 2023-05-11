@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1. The be_founders-employees database &mdash; be_founders 1 documentation</title>
@@ -12,9 +12,8 @@
   <![endif]-->
   
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,12 +26,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> be_founders
-            <img src="../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            be_founders
+              <img src="../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,9 +73,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="user_main.html">User Documentation</a> &raquo;</li>
-      <li><span class="section-number">1. </span>The <em>be_founders-employees</em> database</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="user_main.html">User Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>The <em>be_founders-employees</em> database</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/userdoc/introduction.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,9 +86,9 @@
            <div itemprop="articleBody">
              
   <section id="the-be-founders-employees-database">
-<h1><span class="section-number">1. </span>The <em>be_founders-employees</em> database<a class="headerlink" href="#the-be-founders-employees-database" title="Permalink to this headline"></a></h1>
+<h1><span class="section-number">1. </span>The <em>be_founders-employees</em> database<a class="headerlink" href="#the-be-founders-employees-database" title="Permalink to this heading"></a></h1>
 <section id="data">
-<span id="introdata-label"></span><h2><span class="section-number">1.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline"></a></h2>
+<span id="introdata-label"></span><h2><span class="section-number">1.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading"></a></h2>
 <p>The database has rich microdata about a large number (99k+) of people who
 worked for a set of Belgian start-ups (see <a class="reference internal" href="#introsample-label"><span class="std std-numref">Section 1.2</span></a> for
 information on the start-ups). The database includes nearly all the employees that
@@ -147,7 +150,7 @@ of the <em>be_founders</em> project for more information.</p>
 </div>
 </section>
 <section id="sample">
-<span id="introsample-label"></span><h2><span class="section-number">1.2. </span>Sample<a class="headerlink" href="#sample" title="Permalink to this headline"></a></h2>
+<span id="introsample-label"></span><h2><span class="section-number">1.2. </span>Sample<a class="headerlink" href="#sample" title="Permalink to this heading"></a></h2>
 <p>We built the sample in several steps:</p>
 <ol class="arabic simple">
 <li><p>We retrieved a list of all Belgian start-ups listed in Crunchbase.</p></li>
@@ -195,7 +198,7 @@ background data.</p>
 </div>
 </section>
 <section id="database-structure-and-contents">
-<h2><span class="section-number">1.3. </span>Database structure and contents<a class="headerlink" href="#database-structure-and-contents" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">1.3. </span>Database structure and contents<a class="headerlink" href="#database-structure-and-contents" title="Permalink to this heading"></a></h2>
 <p>We developed the database using Python and PostgreSQL, and release it in
 SQLite format. The database that we release has four schemas:</p>
 <ul class="simple">
@@ -215,7 +218,7 @@ of foreign keys. A description of the tables and their contents is given in
 <a class="reference internal" href="tables.html#tables-label"><span class="std std-numref">Section 4</span></a>.</p>
 </section>
 <section id="database-diagram">
-<span id="section-diagram-label"></span><h2><span class="section-number">1.4. </span>Database diagram<a class="headerlink" href="#database-diagram" title="Permalink to this headline"></a></h2>
+<span id="section-diagram-label"></span><h2><span class="section-number">1.4. </span>Database diagram<a class="headerlink" href="#database-diagram" title="Permalink to this heading"></a></h2>
 <p>Click on the figure below to expand the database diagram.</p>
 <a class="reference internal image-reference" href="../_images/befounders_employees_v1.0.jpg"><img alt="../_images/befounders_employees_v1.0.jpg" src="../_images/befounders_employees_v1.0.jpg" style="width: 600px;" /></a>
 </section>

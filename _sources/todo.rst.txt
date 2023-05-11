@@ -2,4 +2,9 @@
 To do
 -----
 
-[Place here list of to do's]
+
+* Relocate post-docs from education to work experience
+* Use locations in events that have location to impute a location in events
+  that do not have a location
+* simple ways to further disambiguate unique organization id's (e.g.,
+  "2observe" and "2observe sa" -> turn into "2observe")

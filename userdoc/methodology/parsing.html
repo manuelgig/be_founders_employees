@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.2.2. Data parsing &mdash; be_founders 1 documentation</title>
@@ -12,9 +12,8 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -27,12 +26,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> be_founders
-            <img src="../../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            be_founders
+              <img src="../../_static/logo-skema-blanc-og.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,6 +50,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="construction.html">3.2. Construction of the dataset</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="collection.html">3.2.1. Data collection</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">3.2.2. Data parsing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">3.2.3. References</a></li>
 </ul>
 </li>
 </ul>
@@ -72,11 +76,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../user_main.html">User Documentation</a> &raquo;</li>
-          <li><a href="../methodology.html"><span class="section-number">3. </span>Methodology</a> &raquo;</li>
-          <li><a href="construction.html"><span class="section-number">3.2. </span>Construction of the dataset</a> &raquo;</li>
-      <li><span class="section-number">3.2.2. </span>Data parsing</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user_main.html">User Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../methodology.html"><span class="section-number">3. </span>Methodology</a></li>
+          <li class="breadcrumb-item"><a href="construction.html"><span class="section-number">3.2. </span>Construction of the dataset</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.2.2. </span>Data parsing</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/userdoc/methodology/parsing.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,9 +91,9 @@
            <div itemprop="articleBody">
              
   <section id="data-parsing">
-<span id="data-parsing-label"></span><h1><span class="section-number">3.2.2. </span>Data parsing<a class="headerlink" href="#data-parsing" title="Permalink to this headline"></a></h1>
+<span id="data-parsing-label"></span><h1><span class="section-number">3.2.2. </span>Data parsing<a class="headerlink" href="#data-parsing" title="Permalink to this heading"></a></h1>
 <section id="events">
-<h2><span class="section-number">3.2.2.1. </span>Events<a class="headerlink" href="#events" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.1. </span>Events<a class="headerlink" href="#events" title="Permalink to this heading"></a></h2>
 <p>We parsed the individual html files from step <a class="reference internal" href="collection.html#retrieving-employee-data-label"><span class="std std-numref">Section 3.2.1.4</span></a>
 to extract raw event data. An event is an instance of work or education attributed
 to an employee. In its raw form, each event has the following information:</p>
@@ -105,7 +109,7 @@ events)</p></li>
 <p>Filling in all fields is not mandatory, so some field values are missing in events.</p>
 </section>
 <section id="locations">
-<h2><span class="section-number">3.2.2.2. </span>Locations<a class="headerlink" href="#locations" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.2. </span>Locations<a class="headerlink" href="#locations" title="Permalink to this heading"></a></h2>
 <p>We processed locations in two steps:</p>
 <ol class="arabic simple">
 <li><p>we harmonized location data by canonicalizing, cleaning and parsing the
@@ -133,7 +137,7 @@ and parsed locations, and includes fine grained location data.</p>
 </div></blockquote>
 </section>
 <section id="organization-names">
-<h2><span class="section-number">3.2.2.3. </span>Organization names<a class="headerlink" href="#organization-names" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.3. </span>Organization names<a class="headerlink" href="#organization-names" title="Permalink to this heading"></a></h2>
 <p>When a person creates an event in WEFP, either work experience or education, they
 can list the organization where this work event took/is taking place. If WEFP
 has a dedicated page for the organization, a link to it is provided in the event.
@@ -143,6 +147,23 @@ a new mapping of organization names and their unique numeric id. For example,
 if a person creates a study event that includes KU Leuven, while displaying the
 event WEFP will show a URL containing both <strong>Katholieke Universiteit Leuven</strong> and
 <strong>3629</strong> (KU Leuven’s unique numeric id at WEFP).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Organization names are entered by WEFP users and only lightly harmonized by WEFP.
+Hence, both <strong>Katholieke Universiteit Leuven</strong> and <strong>KU Leuven</strong> (and many
+other variants, including spelling mistakes as well) may appear in events
+where users worked or studied at this university.</p>
+<p>WEFP does not fully harmonize the organization name entered by the user, and
+this is the organization name displayed in the event. However, WEFP performs a
+matching task in the background in order to match user-entered organization
+names to organizations’ unique WEFP pages. This is why organizations with
+somewhat different names in the front-end are linked to the same organization
+in the back-end (i.e., all these KU Leuven spelling variations are linked to
+the unique id <strong>3629</strong>).</p>
+<p>While useful, this step may introduce errors, if the match done by WEFP is
+incorrect. For instance, an employee of Datacamp Brazil (a software vendor)
+may be linked to Datacamp (the more prominent online education platform).</p>
+</div>
 <p>However, not all organizations in the database have a dedicated page at WEFP.
 When organizations have a dedicated page at WEFP, we use names, unique
 numeric id, and locations to disambiguate organization data; when they do not,
@@ -159,7 +180,7 @@ and WEFP numeric ids, whereas a row in table <a class="reference internal" href=
 connects raw and parsed organization names.</p>
 </section>
 <section id="job-titles">
-<span id="section-job-titles-label"></span><h2><span class="section-number">3.2.2.4. </span>Job titles<a class="headerlink" href="#job-titles" title="Permalink to this headline"></a></h2>
+<span id="section-job-titles-label"></span><h2><span class="section-number">3.2.2.4. </span>Job titles<a class="headerlink" href="#job-titles" title="Permalink to this heading"></a></h2>
 <p>We processed job title (also referred as job role) strings to harmonize them,
 but also to extract from them the job’s functional area (e.g., accounting,
 marketing, HR, etc.) and rank (e.g., top management, mid-management,
@@ -179,8 +200,15 @@ to get their English translation</p></li>
 us to further disambiguate the job titles, but also to match them to a
 rich external database with job skills, tasks, ranks, etc.</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We keep track of the parsing steps in <a class="reference internal" href="../tables.html#tables-role-link-label"><span class="std std-ref">role_link</span></a>
+and <a class="reference internal" href="../tables.html#tables-program-link-label"><span class="std std-ref">program_link</span></a>. The first column shows the raw string,
+whereas the columns appended with <em>_split</em>, <em>_spellcheck</em>, etc, show (from
+left to right) the parsing process.</p>
+</div>
 <section id="extracting-job-ranks-and-functional-areas">
-<h3><span class="section-number">3.2.2.4.1. </span>Extracting job ranks and functional areas<a class="headerlink" href="#extracting-job-ranks-and-functional-areas" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">3.2.2.4.1. </span>Extracting job ranks and functional areas<a class="headerlink" href="#extracting-job-ranks-and-functional-areas" title="Permalink to this heading"></a></h3>
 <p>We followed the methodology in <span id="id1">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> to classify the parsed
 job titles into:</p>
 <ul class="simple">
@@ -209,7 +237,7 @@ new terms after careful examination of the job title string in our database.</p>
 </section>
 </section>
 <section id="study-programs">
-<h2><span class="section-number">3.2.2.5. </span>Study programs<a class="headerlink" href="#study-programs" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.5. </span>Study programs<a class="headerlink" href="#study-programs" title="Permalink to this heading"></a></h2>
 <p>We parsed the <em>edu_prg</em> raw string in order to identify</p>
 <ul class="simple">
 <li><p>the level of education of each study program (primary school, secondary
@@ -231,18 +259,22 @@ to get their English translation</p></li>
 that refer to the level of the study program (e.g., ‘master’ -&gt; ‘msc’,
 ‘Ph. d.’ -&gt; ‘phd’)</p></li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that while we applied several NLP steps and tools to study programs,
+we never aimed to fully disambiguate them. Rather we fixed spelling
+mistakes, reduced string variation lightly (e.g., engineering -&gt; enginner),
+translated strings, and targeted the parts of the
+string that indicate a level (e.g., primary, secondary, master).</p>
+</div>
 <section id="extracting-education-level-and-field">
-<h3><span class="section-number">3.2.2.5.1. </span>Extracting education level and field<a class="headerlink" href="#extracting-education-level-and-field" title="Permalink to this headline"></a></h3>
+<h3><span class="section-number">3.2.2.5.1. </span>Extracting education level and field<a class="headerlink" href="#extracting-education-level-and-field" title="Permalink to this heading"></a></h3>
 <p><strong>Education level.</strong> We adapted the methodology in <span id="id3">Chen and Thompson [<a class="reference internal" href="#id6" title="Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. Entrepreneurship Theory and Practice, 40(2):289–305, 2016.">CT16</a>]</span> and created lists of words
 that relate to <a class="reference external" href="https://circabc.europa.eu/sd/a/84d88f97-9cc7-45be-963f-ed088440b04b/ISCED%202011%20Operational%20Manual.pdf">ISCED levels of education</a>.
 ISCED 2011 has nine levels of educations, from level 0 to 8. We collapsed them
 into 6 different categories according to <a class="reference internal" href="#table-isced-levels-label"><span class="std std-numref">Table 3.1</span></a>.</p>
 <span id="table-isced-levels-label"></span><table class="docutils align-default" id="id7">
 <caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Table: Correspondence with ISCED levels</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
-<colgroup>
-<col style="width: 48%" />
-<col style="width: 52%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Study level in our database</p></th>
 <th class="head"><p>Corresponds to ISCED level(s)</p></th>
@@ -266,6 +298,9 @@ into 6 different categories according to <a class="reference internal" href="#ta
 </tr>
 <tr class="row-odd"><td><p>Doctoral degree</p></td>
 <td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>Post doctoral</p></td>
+<td><p>NA in ISCED</p></td>
 </tr>
 </tbody>
 </table>
@@ -303,7 +338,7 @@ to that field.</p></li>
 </section>
 </section>
 <section id="age">
-<h2><span class="section-number">3.2.2.6. </span>Age<a class="headerlink" href="#age" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.6. </span>Age<a class="headerlink" href="#age" title="Permalink to this heading"></a></h2>
 <p>We use disambiguated schooling data to estimate entrepreneurs’ birth years and
 derive the age at the time of work experience, education and cofounding. In this step we
 combine information from the study level and the starting or ending year of
@@ -319,11 +354,6 @@ birth year and the cofounding year to estimate the age of the entrepreneur
 at the moment of cofounding a firm.</p>
 <span id="table-other-vars-age-label"></span><table class="docutils align-default" id="id8">
 <caption><span class="caption-number">Table 3.2 </span><span class="caption-text">Mapping rule to estimate an entrepreneur’s birth year</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
-<colgroup>
-<col style="width: 59%" />
-<col style="width: 22%" />
-<col style="width: 18%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Study level</p></th>
 <th class="head"><p>Start age</p></th>
@@ -359,7 +389,7 @@ at the moment of cofounding a firm.</p>
 </table>
 </section>
 <section id="gender">
-<h2><span class="section-number">3.2.2.7. </span>Gender<a class="headerlink" href="#gender" title="Permalink to this headline"></a></h2>
+<h2><span class="section-number">3.2.2.7. </span>Gender<a class="headerlink" href="#gender" title="Permalink to this heading"></a></h2>
 <p>We used <code class="xref py py-mod docutils literal notranslate"><span class="pre">gender-guesser</span></code> on the raw person names to guess
 the gender of the employees. The package takes a person name and classifies is
 into one of five categories: male, female, mostly_male, mostly_female, andy
@@ -373,13 +403,18 @@ we are working to improve the coverage in future versions. Please have in
 mind this figure if you undertake any analysis that relies on the
 gender classification.</p>
 </div>
-<p id="id5"><dl class="citation">
-<dt class="label" id="id6"><span class="brackets">CT16</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>)</span></dt>
-<dd><p>Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. <em>Entrepreneurship Theory and Practice</em>, 40(2):289–305, 2016.</p>
-</dd>
-</dl>
-</p>
 </section>
+</section>
+<section id="references">
+<h1><span class="section-number">3.2.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h1>
+<div class="docutils container" id="id5">
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CT16<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>)</span>
+<p>Li-Wei Chen and Peter Thompson. Skill balance and entrepreneurship evidence from online career histories. <em>Entrepreneurship Theory and Practice</em>, 40(2):289–305, 2016.</p>
+</div>
+</div>
+</div>
 </section>
 
 
