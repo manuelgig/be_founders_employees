@@ -166,11 +166,11 @@
 </tr>
 <tr class="row-odd"><td><p>uuid_person_organization_link</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique person-organization link identifier</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid_organization</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique row identifier of the organization_link table (does not uniquely identify organizations)</p></td>
 </tr>
 <tr class="row-odd"><td><p>organization_id</p></td>
 <td><p>text</p></td>
@@ -257,7 +257,7 @@
 </tr>
 <tr class="row-odd"><td><p>location_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw location string</p></td>
 </tr>
 </tbody>
 </table>
@@ -284,7 +284,7 @@
 </tr>
 <tr class="row-odd"><td><p>organization_name_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw organization name string</p></td>
 </tr>
 </tbody>
 </table>
@@ -307,7 +307,7 @@
 <tbody>
 <tr class="row-even"><td><p>uuid_organization</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique row identifier of the organization_link table (does not uniquely identify organizations)</p></td>
 </tr>
 <tr class="row-odd"><td><p>uuid_organization_name</p></td>
 <td><p>text</p></td>
@@ -369,7 +369,7 @@
 </tr>
 <tr class="row-odd"><td><p>program_desc_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw program description string</p></td>
 </tr>
 </tbody>
 </table>
@@ -396,7 +396,7 @@
 </tr>
 <tr class="row-odd"><td><p>program_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw program title string</p></td>
 </tr>
 </tbody>
 </table>
@@ -423,7 +423,7 @@
 </tr>
 <tr class="row-odd"><td><p>role_desc_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw role description string</p></td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +450,7 @@
 </tr>
 <tr class="row-odd"><td><p>role_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw job (role) title string</p></td>
 </tr>
 </tbody>
 </table>
@@ -477,7 +477,7 @@
 </tr>
 <tr class="row-odd"><td><p>role_type_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw job (role) type string</p></td>
 </tr>
 </tbody>
 </table>
@@ -507,7 +507,7 @@
 </tr>
 <tr class="row-odd"><td><p>uuid_person_organization_link</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique person-organization link identifier</p></td>
 </tr>
 <tr class="row-even"><td><p>date_start</p></td>
 <td><p>timestamp without time zone</p></td>
@@ -683,7 +683,7 @@
 </tr>
 <tr class="row-odd"><td><p>location_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw location string</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid_location_parsed</p></td>
 <td><p>text</p></td>
@@ -695,11 +695,11 @@
 </tr>
 <tr class="row-even"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-odd"><td><p>ok</p></td>
 <td><p>boolean</p></td>
-<td></td>
+<td><p>Indicates whether the search produced results</p></td>
 </tr>
 <tr class="row-even"><td><p>type</p></td>
 <td><p>text</p></td>
@@ -896,7 +896,7 @@
 <tbody>
 <tr class="row-even"><td><p>uuid_organization</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique row identifier of the organization_link table (does not uniquely identify organizations)</p></td>
 </tr>
 <tr class="row-odd"><td><p>uuid_organization_name</p></td>
 <td><p>text</p></td>
@@ -947,7 +947,7 @@
 </tr>
 <tr class="row-odd"><td><p>name_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw person name string</p></td>
 </tr>
 <tr class="row-even"><td><p>curr_job_statement</p></td>
 <td><p>text</p></td>
@@ -1186,7 +1186,7 @@
 <tbody>
 <tr class="row-even"><td><p>program_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw program title string</p></td>
 </tr>
 <tr class="row-odd"><td><p>uuid_program_raw</p></td>
 <td><p>text</p></td>
@@ -1494,7 +1494,7 @@
 <tbody>
 <tr class="row-even"><td><p>role_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw job (role) title string</p></td>
 </tr>
 <tr class="row-odd"><td><p>uuid_role_raw</p></td>
 <td><p>text</p></td>
@@ -1619,11 +1619,11 @@
 </tr>
 <tr class="row-even"><td><p>roles_start</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Number of new roles that started that year. Note that role start &lt;&gt; new hires. A new hire indicates a person that did not work in the company before has joine the company, whereas a role start indicates that a person (new or not new in the organization has taken a new role)</p></td>
 </tr>
 <tr class="row-odd"><td><p>roles_end</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Number of roles that ended that year. We consider that a role ended when a person finished a working spell, either because she left the company, or because she moved to a different role. The role is considered ended even if it was taken up by a different person.</p></td>
 </tr>
 <tr class="row-even"><td><p>hires</p></td>
 <td><p>bigint</p></td>
@@ -1666,7 +1666,7 @@
 </tr>
 <tr class="row-odd"><td><p>uuid_person_organization_link</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Unique person-organization link identifier</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid_organization_unique</p></td>
 <td><p>text</p></td>
@@ -1722,7 +1722,7 @@
 </tr>
 <tr class="row-odd"><td><p>role_type_raw</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>Raw job (role) type string</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid_program_parsed</p></td>
 <td><p>text</p></td>
@@ -1864,7 +1864,7 @@
 </tr>
 <tr class="row-odd"><td><p>title_parsed</p></td>
 <td><p>text</p></td>
-<td></td>
+<td><p>O*NET database job title (parsed)</p></td>
 </tr>
 <tr class="row-even"><td><p>alternate_title_parsed</p></td>
 <td><p>text</p></td>
@@ -2141,7 +2141,7 @@
 <tbody>
 <tr class="row-even"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-odd"><td><p>round</p></td>
 <td><p>bigint</p></td>
@@ -2228,11 +2228,11 @@
 </tr>
 <tr class="row-even"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-odd"><td><p>ok</p></td>
 <td><p>boolean</p></td>
-<td></td>
+<td><p>Indicates whether the search produced results</p></td>
 </tr>
 <tr class="row-even"><td><p>type</p></td>
 <td><p>text</p></td>
@@ -2295,7 +2295,7 @@
 </tr>
 <tr class="row-even"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-odd"><td><p>lat</p></td>
 <td><p>double precision</p></td>
@@ -2406,15 +2406,15 @@
 </tr>
 <tr class="row-even"><td><p>curr_page</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>The current page of the search instance (with reference to the total page number in nr_pages)</p></td>
 </tr>
 <tr class="row-odd"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-even"><td><p>nr_pages</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Number of pages in the search results</p></td>
 </tr>
 <tr class="row-odd"><td><p>uuid</p></td>
 <td><p>text</p></td>
@@ -2497,7 +2497,7 @@
 </tr>
 <tr class="row-odd"><td><p>nr_results</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Number of results produced by this search instance</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid</p></td>
 <td><p>text</p></td>
@@ -2536,7 +2536,7 @@
 </tr>
 <tr class="row-odd"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-even"><td><p>url_scraped</p></td>
 <td><p>text</p></td>
@@ -2567,7 +2567,7 @@
 <tbody>
 <tr class="row-even"><td><p>li_url_parsed_id</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Legacy identifier for WEFP firms (has no value in the current db)</p></td>
 </tr>
 <tr class="row-odd"><td><p>company</p></td>
 <td><p>text</p></td>
@@ -2579,7 +2579,7 @@
 </tr>
 <tr class="row-odd"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-even"><td><p>url_people_search</p></td>
 <td><p>text</p></td>
@@ -2595,7 +2595,7 @@
 </tr>
 <tr class="row-odd"><td><p>nr_pages</p></td>
 <td><p>double precision</p></td>
-<td></td>
+<td><p>Number of pages in the search results</p></td>
 </tr>
 </tbody>
 </table>
@@ -2618,7 +2618,7 @@
 <tbody>
 <tr class="row-even"><td><p>li_url_parsed_id</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>Legacy identifier for WEFP firms (has no value in the current db)</p></td>
 </tr>
 <tr class="row-odd"><td><p>company</p></td>
 <td><p>text</p></td>
@@ -2630,7 +2630,7 @@
 </tr>
 <tr class="row-odd"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-even"><td><p>url_people_search</p></td>
 <td><p>text</p></td>
@@ -2646,7 +2646,7 @@
 </tr>
 <tr class="row-odd"><td><p>nr_pages</p></td>
 <td><p>double precision</p></td>
-<td></td>
+<td><p>Number of pages in the search results</p></td>
 </tr>
 </tbody>
 </table>
@@ -2669,7 +2669,7 @@
 <tbody>
 <tr class="row-even"><td><p>li_organization_id</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>WEFP unique numeric identifier used to search for employees</p></td>
 </tr>
 <tr class="row-odd"><td><p>organization_name</p></td>
 <td><p>text</p></td>
@@ -2689,15 +2689,15 @@
 </tr>
 <tr class="row-odd"><td><p>curr_page</p></td>
 <td><p>bigint</p></td>
-<td></td>
+<td><p>The current page of the search instance (with reference to the total page number in nr_pages)</p></td>
 </tr>
 <tr class="row-even"><td><p>time</p></td>
 <td><p>timestamp without time zone</p></td>
-<td></td>
+<td><p>Time when the search / data collection took place</p></td>
 </tr>
 <tr class="row-odd"><td><p>nr_pages</p></td>
 <td><p>double precision</p></td>
-<td></td>
+<td><p>Number of pages in the search results</p></td>
 </tr>
 <tr class="row-even"><td><p>uuid</p></td>
 <td><p>text</p></td>
