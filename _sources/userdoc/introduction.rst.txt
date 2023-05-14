@@ -113,8 +113,8 @@ who worked for 910 Belgian start-ups. It comprises 997k events, divided into
 Database structure and contents
 -------------------------------
 
-We developed the database using Python and PostgreSQL, and release it in
-SQLite format. The database that we release has four schemas:
+We developed the database using Python and PostgreSQL, and release it as a db
+dump in a single .tar file. The database that we release has four schemas:
 
 * **raw:** contains tables with raw (i.e., unprocessed) data that we extracted
   from the html files obtained by the web scrapers (e.g., raw company names,

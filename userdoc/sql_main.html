@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5. Using the SQLite db &mdash; be_founders 1 documentation</title>
+  <title>5. Using the db &mdash; be_founders 1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/mystyle.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -47,7 +47,7 @@
 <li class="toctree-l2"><a class="reference internal" href="quickstart.html">2. Quick start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methodology.html">3. Methodology</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tables.html">4. Description of tables</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Using the SQLite db</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Using the db</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#db-diagram">5.1. Db diagram</a></li>
 </ul>
 </li>
@@ -72,7 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="user_main.html">User Documentation</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">5. </span>Using the SQLite db</li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Using the db</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/userdoc/sql_main.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,16 +82,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="using-the-sqlite-db">
-<h1><span class="section-number">5. </span>Using the SQLite db<a class="headerlink" href="#using-the-sqlite-db" title="Permalink to this heading"></a></h1>
-<p>You can use the database following these steps:</p>
+  <section id="using-the-db">
+<h1><span class="section-number">5. </span>Using the db<a class="headerlink" href="#using-the-db" title="Permalink to this heading"></a></h1>
+<p>In order to use the database you need to have a PostgreSQL database running somewhere
+in your computer (if you do it locally) or in the cloud (e.g., in AWS, GC, etc.).</p>
 <ol class="arabic simple">
-<li><p>Download and unzip the file with the SQLite database</p></li>
-<li><p>Open your database manager (e.g., <a class="reference external" href="https://dbeaver.io/">DBeaver</a>)</p></li>
-<li><p>Click on any button/menu that reads something like “New Database Connection”
-or “Connect to a Database”</p></li>
-<li><p>Select SQLite as connection type</p></li>
-<li><p>In the “path” or “browse” option point to the SQLite file you downloaded</p></li>
+<li><p>If you don’t have PostgreSQL running in your computer you need to install it
+First</p>
+<ol class="arabic simple">
+<li><p>Install PostgreSQL (download it <a class="reference external" href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">here</a>)</p></li>
+<li><p>Open your database manager (e.g., <a class="reference external" href="https://dbeaver.io/">DBeaver</a>)
+and create a new connection to your new PostgreSQL instance</p></li>
+</ol>
+</li>
+<li><p>Download the database (see the <a class="reference internal" href="../download.html#download-label"><span class="std std-ref">Download</span></a> section) and unzip it</p></li>
+<li><p>Open DBeaver, in the <em>Database Navigator</em> go to your connection (typically called “postgres” by defauly),
+and expand it down to Databases -&gt; postgres</p></li>
+<li><p>Right click on “postgres”, go to Tools -&gt; Restore</p></li>
+<li><p>Inside the “input” section, in the “Backup file” box choose the .tar file you got from us</p></li>
+<li><p>Click “Start”</p></li>
 </ol>
 <section id="db-diagram">
 <h2><span class="section-number">5.1. </span>Db diagram<a class="headerlink" href="#db-diagram" title="Permalink to this heading"></a></h2>

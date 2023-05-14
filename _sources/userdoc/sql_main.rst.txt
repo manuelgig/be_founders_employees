@@ -1,14 +1,22 @@
-Using the SQLite db
-===================
+Using the db
+============
 
-You can use the database following these steps:
+In order to use the database you need to have a PostgreSQL database running somewhere
+in your computer (if you do it locally) or in the cloud (e.g., in AWS, GC, etc.).
 
-#. Download and unzip the file with the SQLite database
-#. Open your database manager (e.g., `DBeaver <https://dbeaver.io/>`_)
-#. Click on any button/menu that reads something like "New Database Connection"
-   or "Connect to a Database"
-#. Select SQLite as connection type
-#. In the "path" or "browse" option point to the SQLite file you downloaded
+#. If you don't have PostgreSQL running in your computer you need to install it
+   First
+
+   #. Install PostgreSQL (download it `here <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads>`_)
+   #. Open your database manager (e.g., `DBeaver <https://dbeaver.io/>`_)
+      and create a new connection to your new PostgreSQL instance
+
+#. Download the database (see the :ref:`download-label` section) and unzip it
+#. Open DBeaver, in the *Database Navigator* go to your connection (typically called "postgres" by defauly),
+   and expand it down to Databases -> postgres
+#. Right click on "postgres", go to Tools -> Restore
+#. Inside the "input" section, in the "Backup file" box choose the .tar file you got from us
+#. Click "Start"
 
 Db diagram
 ----------
