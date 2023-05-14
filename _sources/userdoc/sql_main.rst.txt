@@ -1,22 +1,33 @@
 Using the db
 ============
 
-In order to use the database you need to have a PostgreSQL database running somewhere
-in your computer (if you do it locally) or in the cloud (e.g., in AWS, GC, etc.).
+In order to use the database you need to have a
+`PostgreSQL <https://www.postgresql.org/about/>`_ database instance running
+somewhere in your computer (if you do it locally) or in the cloud (e.g., in
+AWS, GC, etc.).
+
+.. note ::
+  We recommend you get a graphical tool to manage and develop your PostgreSQL
+  databases. The PostgreSQL comes with PgAdmin, which is quite basic.
+  We suggest you get a more advanced tool that can handle many database types,
+  such as `DBeaver <https://dbeaver.io/>`_ or Pycharm.
 
 #. If you don't have PostgreSQL running in your computer you need to install it
-   First
+   first. You can download it `here <https://www.postgresql.org/download/>`_
 
-   #. Install PostgreSQL (download it `here <https://www.enterprisedb.com/downloads/postgres-postgresql-downloads>`_)
-   #. Open your database manager (e.g., `DBeaver <https://dbeaver.io/>`_)
-      and create a new connection to your new PostgreSQL instance
 
-#. Download the database (see the :ref:`download-label` section) and unzip it
-#. Open DBeaver, in the *Database Navigator* go to your connection (typically called "postgres" by default),
-   and expand it down to Databases -> postgres
-#. Right click on "postgres", go to Tools -> Restore
-#. Inside the "input" section, in the "Backup file" box choose the .tar file you got from us
-#. Click "Start"
+#. Download the database (see the :ref:`download-label` section) and unzip it.
+   The .tar file you unzipped contains the database you are about to install
+#. Open DBeaver
+
+  #. Create a new connection to your PostgreSQL instance:
+     Database -> New Database Connection -> PostgreSQL
+  #. In the *Database Navigator* go to your connection (typically
+     called "postgres" by default), and expand it down to Databases -> postgres
+  #. Right click on "postgres", go to Tools -> Restore
+  #. Inside the "input" section, in the "Backup file" box choose the .tar file
+     you got from us
+  #. Click "Start"
 
 Db diagram
 ----------

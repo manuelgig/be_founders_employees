@@ -84,24 +84,36 @@
              
   <section id="using-the-db">
 <h1><span class="section-number">5. </span>Using the db<a class="headerlink" href="#using-the-db" title="Permalink to this heading"></a></h1>
-<p>In order to use the database you need to have a PostgreSQL database running somewhere
-in your computer (if you do it locally) or in the cloud (e.g., in AWS, GC, etc.).</p>
+<p>In order to use the database you need to have a
+<a class="reference external" href="https://www.postgresql.org/about/">PostgreSQL</a> database instance running
+somewhere in your computer (if you do it locally) or in the cloud (e.g., in
+AWS, GC, etc.).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend you get a graphical tool to manage and develop your PostgreSQL
+databases. The PostgreSQL comes with PgAdmin, which is quite basic.
+We suggest you get a more advanced tool that can handle many database types,
+such as <a class="reference external" href="https://dbeaver.io/">DBeaver</a> or Pycharm.</p>
+</div>
 <ol class="arabic simple">
 <li><p>If you don’t have PostgreSQL running in your computer you need to install it
-First</p>
-<ol class="arabic simple">
-<li><p>Install PostgreSQL (download it <a class="reference external" href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">here</a>)</p></li>
-<li><p>Open your database manager (e.g., <a class="reference external" href="https://dbeaver.io/">DBeaver</a>)
-and create a new connection to your new PostgreSQL instance</p></li>
+first. You can download it <a class="reference external" href="https://www.postgresql.org/download/">here</a></p></li>
+<li><p>Download the database (see the <a class="reference internal" href="../download.html#download-label"><span class="std std-ref">Download</span></a> section) and unzip it.
+The .tar file you unzipped contains the database you are about to install</p></li>
+<li><p>Open DBeaver</p></li>
 </ol>
-</li>
-<li><p>Download the database (see the <a class="reference internal" href="../download.html#download-label"><span class="std std-ref">Download</span></a> section) and unzip it</p></li>
-<li><p>Open DBeaver, in the <em>Database Navigator</em> go to your connection (typically called “postgres” by default),
-and expand it down to Databases -&gt; postgres</p></li>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Create a new connection to your PostgreSQL instance:
+Database -&gt; New Database Connection -&gt; PostgreSQL</p></li>
+<li><p>In the <em>Database Navigator</em> go to your connection (typically
+called “postgres” by default), and expand it down to Databases -&gt; postgres</p></li>
 <li><p>Right click on “postgres”, go to Tools -&gt; Restore</p></li>
-<li><p>Inside the “input” section, in the “Backup file” box choose the .tar file you got from us</p></li>
+<li><p>Inside the “input” section, in the “Backup file” box choose the .tar file
+you got from us</p></li>
 <li><p>Click “Start”</p></li>
 </ol>
+</div></blockquote>
 <section id="db-diagram">
 <h2><span class="section-number">5.1. </span>Db diagram<a class="headerlink" href="#db-diagram" title="Permalink to this heading"></a></h2>
 <p>Check the db diagram in <a class="reference internal" href="introduction.html#section-diagram-label"><span class="std std-numref">Section 1.4</span></a>.</p>
