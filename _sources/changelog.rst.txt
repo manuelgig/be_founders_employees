@@ -9,3 +9,7 @@ Changelog
 +----------+-----------+-------------------------------------------------------------------+
 | 1.0      | Apr 2023  | First release                                                     |
 +----------+-----------+-------------------------------------------------------------------+
+| 1.1      | Dec 2023  | Fixed org_id-bvd_id match in public.orbis_fin,                    |
+|          |           | Added cty_incorporation to public.org_orbis_link                  |
+|          |           | Added multiple categories to public.employee_turnover             |
++----------+-----------+-------------------------------------------------------------------+
