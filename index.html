@@ -73,7 +73,7 @@
   <section id="the-be-founders-employees-database">
 <h1>The <em>be_founders-employees</em> database<a class="headerlink" href="#the-be-founders-employees-database" title="Permalink to this heading"></a></h1>
 <p>This database contains rich micro-data about the employees (n=99,432) from a
-sample Belgian start-ups (m=910). It is a spin-off from the <a class="reference external" href="https://manuelgig.github.io/be_founders_documentation/">be_founders project</a>. Whereas
+sample of Belgian start-ups (m=910). It is a spin-off from the <a class="reference external" href="https://manuelgig.github.io/be_founders_documentation/">be_founders project</a>. Whereas
 <strong>be_founders</strong> contains data about start-up founders only,
 <strong>be_founders_employees</strong> contains information about the founders
 <em>and</em> the employees.</p>
@@ -93,7 +93,7 @@ with rich information about turnover and churn, but employee skills, experience,
 and networks.</p>
 <section id="current-version">
 <h2>Current version<a class="headerlink" href="#current-version" title="Permalink to this heading"></a></h2>
-<p>v1.0 (April 2023; first release)</p>
+<p>v2.0 (March 2024)</p>
 </section>
 </section>
 <section id="index">
@@ -181,15 +181,20 @@ and networks.</p>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="userdoc/tables.html#schema-public">4.3. Schema: public</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#employee-turnover">4.3.1. employee_turnover</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#event-flat">4.3.2. event_flat</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#isced-field">4.3.3. isced_field</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#onet-alternate-titles">4.3.4. onet_alternate_titles</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis">4.3.5. orbis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis-fin">4.3.6. orbis_fin</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis-sector">4.3.7. orbis_sector</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#org-orbis-link">4.3.8. org_orbis_link</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#role-onet-link">4.3.9. role_onet_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#cb-acquisition">4.3.1. cb_acquisition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#cb-funding-round">4.3.2. cb_funding_round</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#cb-landing-data">4.3.3. cb_landing_data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#employee-turnover">4.3.4. employee_turnover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#event-flat">4.3.5. event_flat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#isced-field">4.3.6. isced_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#kbo-status">4.3.7. kbo_status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#onet-alternate-titles">4.3.8. onet_alternate_titles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis">4.3.9. orbis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis-fin">4.3.10. orbis_fin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#orbis-ownership">4.3.11. orbis_ownership</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#org-cb-bvd-link">4.3.12. org_cb_bvd_link</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#org-id-name">4.3.13. org_id_name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#role-onet-link">4.3.14. role_onet_link</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="userdoc/tables.html#schema-log">4.4. Schema: log</a><ul>
@@ -199,9 +204,8 @@ and networks.</p>
 <li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#org-id-search">4.4.4. org_id_search</a></li>
 <li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#org-id-search-results">4.4.5. org_id_search_results</a></li>
 <li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-download">4.4.6. person_download</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-search">4.4.7. person_search</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-search-1">4.4.8. person_search_1</a></li>
-<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-search-2">4.4.9. person_search_2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-search-1">4.4.7. person_search_1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="userdoc/tables.html#person-search-2">4.4.8. person_search_2</a></li>
 </ul>
 </li>
 </ul>

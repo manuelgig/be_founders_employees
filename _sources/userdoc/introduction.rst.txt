@@ -138,5 +138,5 @@ Database diagram
 
 Click on the figure below to expand the database diagram.
 
-.. image:: /img/befounders_employees_v1.0.jpg
+.. image:: /img/befounders_employees_v2.0.png
    :width: 600

@@ -8,7 +8,7 @@ The *be_founders-employees* database
 ####################################
 
 This database contains rich micro-data about the employees (n=99,432) from a
-sample Belgian start-ups (m=910). It is a spin-off from the `be_founders project
+sample of Belgian start-ups (m=910). It is a spin-off from the `be_founders project
 <https://manuelgig.github.io/be_founders_documentation/>`_. Whereas
 **be_founders** contains data about start-up founders only,
 **be_founders_employees** contains information about the founders
@@ -32,7 +32,7 @@ and networks.
 Current version
 ---------------
 
-v1.0 (April 2023; first release)
+v2.0 (March 2024)
 
 #####
 Index
